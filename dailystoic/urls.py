@@ -13,6 +13,8 @@ urlpatterns = [
     path('newsletter/unsubscribe/<str:email>/', views.newsletter_unsubscribe, name='newsletter_unsubscribe'),
     path('newsletter/test/', views.test_newsletter, name='test_newsletter'),
     path('documentation/', views.documentation, name='documentation'),
+    path('test_404/', views.test_404, name='test_404'),
+    path('test_500/', views.test_500, name='test_500'),
 
     path('quote/text_pl.json', serve, {
         'document_root': os.path.join(settings.MEDIA_ROOT, 'dailystoic/quote'),

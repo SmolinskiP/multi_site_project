@@ -11,7 +11,6 @@ from visits.views import visits_stats
 handler404 = 'ashes.views.custom_404'  # Pełna ścieżka do modułu
 handler500 = 'ashes.views.custom_500'
 
-
 sitemaps = {
     'static': StaticViewSitemap,
 }

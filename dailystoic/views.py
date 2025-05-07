@@ -227,3 +227,18 @@ def custom_404(request, exception):
 
 def custom_500(request):
     return render(request, 'dailystoic/500.html', status=500)
+
+def test_404(request):
+    """
+    Widok testowy do sprawdzenia strony 404
+    """
+    # Wysyła HttpResponseNotFound
+    from django.http import Http404
+    raise Http404("Test strony 404")
+
+def test_500(request):
+    """
+    Widok testowy do sprawdzenia strony 500
+    """
+    # Celowo wywołuje wyjątek, aby wywołać błąd 500
+    raise Exception("Test strony 500")

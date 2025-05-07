@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from visits.views import visits_stats
 
+handler404 = 'dailystoic.views.custom_404'
+handler500 = 'dailystoic.views.custom_500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
