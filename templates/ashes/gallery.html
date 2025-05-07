@@ -1,0 +1,579 @@
+{% extends 'ashes/base.html' %}
+{% block title %}Galeria Pokazów Ognia | Zdjęcia i Filmy{% endblock %}
+{% block meta_description %}Zobacz zdjęcia i filmy z naszych pokazów ognia. Spektakularne fireshow, taniec z ogniem i występy artystyczne z pirotechniką.{% endblock %}
+{% block meta_keywords %}galeria fire show, zdjęcia pokazów ognia, filmy fireshow, występy z ogniem{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    /* Style dla strony galerii */
+    .gallery-hero {
+        height: 40vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/gallery-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Dodany gradient jak w workshops.html */
+    .gallery-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(179,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    }
+    
+    .gallery-hero-content {
+        text-align: center;
+        color: #fff;
+        max-width: 800px;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2; /* Dodane dla pewności, że tekst będzie nad gradientem */
+    }
+    
+    .gallery-hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    .gallery-hero-content p {
+        font-size: 1.2rem;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        opacity: 0.9;
+    }
+    
+    .gallery-container {
+        background-color: #0a0a0a;
+        padding: 3rem 1rem;
+    }
+    
+    .gallery-filters {
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        padding: 0.6rem 1.5rem;
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        color: #bdbdbd;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .filter-btn:hover {
+        background-color: #252525;
+        color: #fff;
+    }
+    
+    .filter-btn.active {
+        background-color: #b30000;
+        color: #fff;
+        border-color: #b30000;
+    }
+    
+    .gallery-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        columns: 3 300px;
+        column-gap: 1.5rem;
+    }
+    
+    .gallery-item {
+        break-inside: avoid;
+        margin-bottom: 1.5rem;
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.5s ease;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .gallery-item.filtered-out {
+        opacity: 0;
+        transform: scale(0);
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .gallery-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+        transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover .gallery-image {
+        transform: scale(1.03);
+    }
+    
+    .gallery-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .gallery-item:hover::after {
+        opacity: 1;
+    }
+    
+    .gallery-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        color: #fff;
+        width: 100%;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: translateY(20px);
+        opacity: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .gallery-caption h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    
+    .gallery-caption p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    
+    /* Lightbox style */
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .lightbox.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .lightbox-image {
+        max-width: 100%;
+        max-height: 90vh;
+        border: 2px solid #333;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    .lightbox-caption {
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+    }
+    
+    .lightbox-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+    
+    .lightbox-close:hover {
+        opacity: 1;
+    }
+    
+    .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 20px;
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+        background: rgba(0,0,0,0.5);
+        border: none;
+        color: #fff;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
+    }
+    
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+        background: rgba(179,0,0,0.7);
+    }
+    
+    @media (max-width: 768px) {
+        .gallery-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        
+        .gallery-hero-content p {
+            font-size: 1rem;
+        }
+        
+        .gallery-filters {
+            flex-direction: row;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding-bottom: 1rem;
+        }
+        
+        .filter-btn {
+            flex: 0 0 auto;
+        }
+        
+        .gallery-grid {
+            columns: 2 200px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .gallery-grid {
+            columns: 1;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="gallery-hero">
+    <div class="gallery-hero-content">
+        <h1>Galeria</h1>
+        <p>Zanurz się w świecie ognia, światła i tańca. Odkryj magię Ashes Fireshow uwiecznioną w kadrze.</p>
+    </div>
+</section>
+
+<section class="gallery-container">
+    <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">Wszystkie</button>
+        {% for category in categories %}
+            <button class="filter-btn" data-filter="{{ category.slug }}">{{ category.name }}</button>
+        {% endfor %}
+    </div>
+    
+    <div class="gallery-grid">
+        {% if images %}
+            {% for image in images %}
+                <div class="gallery-item" data-category="{{ image.category.slug }}">
+                    <img src="{{ image.image.url }}" alt="{{ image.title }}" class="gallery-image" loading="lazy">
+                    <div class="gallery-caption">
+                        <h3>{{ image.title }}</h3>
+                        {% if image.description %}
+                            <p>{{ image.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <!-- Standardowe zdjęcia jako backup, gdy baza danych jest pusta -->
+            <div class="gallery-item" data-category="fireshow">
+                <img src="{% static 'ashes/img/gallery/fire1.jpg' %}" alt="Fireshow performance" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Spektakl ognia</h3>
+                    <p>Widowiskowy pokaz z użyciem poi ogniowych</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="fireshow">
+                <img src="{% static 'ashes/img/gallery/fire2.jpg' %}" alt="Fire breathing" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Oddech smoka</h3>
+                    <p>Technika oddychania ogniem podczas nocnego pokazu</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="fireshow">
+                <img src="{% static 'ashes/img/gallery/fire3.jpg' %}" alt="Fire performers" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Ognisty krąg</h3>
+                    <p>Synchronizacja artystów podczas występu grupowego</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="fireshow">
+                <img src="{% static 'ashes/img/gallery/fire4.jpg' %}" alt="Fire staff" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Władca ognia</h3>
+                    <p>Pokaz z użyciem ognistego kija</p>
+                </div>
+            </div>
+            
+            <!-- LED Show -->
+            <div class="gallery-item" data-category="ledshow">
+                <img src="{% static 'ashes/img/gallery/led1.jpg' %}" alt="LED show" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Świetlne obrazy</h3>
+                    <p>Malowanie światłem w ciemności</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="ledshow">
+                <img src="{% static 'ashes/img/gallery/led2.jpg' %}" alt="LED performance" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Neonowa burza</h3>
+                    <p>Pokaz z wykorzystaniem zaawansowanych technik LED</p>
+                </div>
+            </div>
+            
+            <!-- Fire Dance -->
+            <div class="gallery-item" data-category="firedance">
+                <img src="{% static 'ashes/img/gallery/dance1.jpg' %}" alt="Fire dance" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Taniec z żywiołem</h3>
+                    <p>Fuzja tańca współczesnego z manipulacją ogniem</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="firedance">
+                <img src="{% static 'ashes/img/gallery/dance2.jpg' %}" alt="Fire dancer" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Flamenco ognia</h3>
+                    <p>Ekspresyjny taniec inspirowany tradycją hiszpańską</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="firedance">
+                <img src="{% static 'ashes/img/gallery/dance3.jpg' %}" alt="Fire dance performance" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Ognisty balet</h3>
+                    <p>Precyzja i gracja w tańcu z ognistymi rekwizytami</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="firedance">
+                <img src="{% static 'ashes/img/gallery/dance4.jpg' %}" alt="Fire dance duo" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Ognisty duet</h3>
+                    <p>Taniec w parze z elementami akrobatyki ogniowej</p>
+                </div>
+            </div>
+            
+            <!-- Workshops -->
+            <div class="gallery-item" data-category="workshops">
+                <img src="{% static 'ashes/img/gallery/workshop1.jpg' %}" alt="Fire workshop" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Pierwsze kroki</h3>
+                    <p>Warsztaty dla początkujących adeptów sztuki ognia</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="workshops">
+                <img src="{% static 'ashes/img/gallery/workshop2.jpg' %}" alt="Children workshop" class="gallery-image">
+                <div class="gallery-caption">
+                    <h3>Młodzi ogniomistrze</h3>
+                    <p>Warsztaty dla dzieci z domów dziecka</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Lightbox container -->
+<div class="lightbox">
+    <div class="lightbox-content">
+        <img src="" alt="" class="lightbox-image">
+        <div class="lightbox-caption"></div>
+        <button class="lightbox-close">&times;</button>
+        <div class="lightbox-nav">
+            <button class="lightbox-prev">&#10094;</button>
+            <button class="lightbox-next">&#10095;</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Filtrowanie zdjęć
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Usuń klasę active z wszystkich przycisków
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Dodaj klasę active do klikniętego przycisku
+                this.classList.add('active');
+                
+                // Pobierz kategorię
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Filtruj elementy galerii
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.classList.remove('filtered-out');
+                    } else {
+                        item.classList.add('filtered-out');
+                    }
+                });
+            });
+        });
+        
+        // Lightbox
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImage = document.querySelector('.lightbox-image');
+        const lightboxCaption = document.querySelector('.lightbox-caption');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxPrev = document.querySelector('.lightbox-prev');
+        const lightboxNext = document.querySelector('.lightbox-next');
+        
+        let currentIndex = 0;
+        const visibleItems = () => Array.from(galleryItems).filter(item => !item.classList.contains('filtered-out'));
+        
+        // Otwieranie Lightbox po kliknięciu na zdjęcie
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const items = visibleItems();
+                currentIndex = items.indexOf(this);
+                
+                const img = this.querySelector('img');
+                const caption = this.querySelector('.gallery-caption h3').textContent;
+                
+                lightboxImage.src = img.src;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('active');
+                
+                // Blokuj przewijanie body
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Zamykanie Lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            // Odblokuj przewijanie body
+            document.body.style.overflow = '';
+        });
+        
+        // Zamykanie Lightbox po kliknięciu poza zdjęciem
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Nawigacja - poprzednie zdjęcie
+        lightboxPrev.addEventListener('click', () => {
+            const items = visibleItems();
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            
+            const item = items[currentIndex];
+            const img = item.querySelector('img');
+            const caption = item.querySelector('.gallery-caption h3').textContent;
+            
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = caption;
+        });
+        
+        // Nawigacja - następne zdjęcie
+        lightboxNext.addEventListener('click', () => {
+            const items = visibleItems();
+            currentIndex = (currentIndex + 1) % items.length;
+            
+            const item = items[currentIndex];
+            const img = item.querySelector('img');
+            const caption = item.querySelector('.gallery-caption h3').textContent;
+            
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = caption;
+        });
+        
+        // Obsługa klawiszy strzałek i ESC
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                lightboxPrev.click();
+            } else if (e.key === 'ArrowRight') {
+                lightboxNext.click();
+            } else if (e.key === 'Escape') {
+                lightboxClose.click();
+            }
+        });
+        
+        // Animacja pojawiania się zdjęć podczas przewijania
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        galleryItems.forEach(item => {
+            item.style.opacity = 0;
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+    });
+</script>
+{% endblock %}

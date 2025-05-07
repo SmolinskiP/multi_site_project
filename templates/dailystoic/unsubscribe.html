@@ -1,0 +1,22 @@
+{% extends 'dailystoic/base.html' %}
+{% load static %}
+
+{% block title %}Anulowanie subskrypcji{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="unsubscribe-section">
+        <div class="unsubscribe-card">
+            {% if error %}
+                <h2>Ups! Coś poszło nie tak</h2>
+                <p>Nie znaleźliśmy tego adresu email w naszej bazie subskrybentów.</p>
+            {% else %}
+                <h2>Anulowanie subskrypcji</h2>
+                <p>Twoje anulowanie subskrypcji dla adresu <strong>{{ email }}</strong> zostało zrealizowane.</p>
+                <p>Przykro nam, że odchodzisz. Jeśli zmienisz zdanie, zawsze możesz zapisać się ponownie.</p>
+            {% endif %}
+            <a href="{% url 'dailystoic:home' %}" class="newsletter-btn">Powrót na stronę główną</a>
+        </div>
+    </section>
+</div>
+{% endblock %}

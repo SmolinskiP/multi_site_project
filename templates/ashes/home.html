@@ -1,0 +1,495 @@
+{% extends 'ashes/base.html' %}
+{% block title %}Grupa Fireshow | Pokazy Ognia{% endblock %}
+{% block meta_description %}Ashes Fireshow - profesjonalne pokazy ognia i fireshow. Tworzymy spektakularne pokazy na eventy, wesela i imprezy firmowe. Sprawdź naszą ofertę!{% endblock %}
+{% block meta_keywords %}pokazy ognia, fire show, fireshow, taniec z ogniem, występy z ogniem, pokazy na wesele, fireshow na event{% endblock %}
+
+{% load static %}
+
+{% block extra_head %}
+<style>
+    header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1000 !important;
+        background-color: rgba(7, 7, 7, 0.8) !important;
+        backdrop-filter: blur(5px) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+        transition: transform 0.3s ease !important; /* Kluczowe dla animacji */
+    }
+
+    .about-section {
+        padding: 5rem 2rem;
+        background-color: #121212;
+        color: #f5f5f5;
+    }
+    
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
+    }
+    
+    .about-image {
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+    }
+    
+    .about-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        display: block;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .about-image-border {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        right: 15px;
+        bottom: 15px;
+        border: 2px solid #b30000;
+        border-radius: 8px;
+        z-index: 1;
+    }
+    
+    .about-content {
+        flex: 1;
+        min-width: 300px;
+        text-align: left;
+    }
+    
+    .about-content h2 {
+        font-family: 'AshFont', sans-serif;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+        font-weight: normal;
+        text-align: left;
+    }
+    
+    .about-content p {
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        text-align: left;
+    }
+    
+    .contact-info {
+        margin-top: 3rem;
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .contact-info a {
+        color: #ff6b35;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .contact-info a:hover {
+        color: #ff8c5a;
+    }
+    
+    @media (max-width: 992px) {
+        .about-container {
+            flex-direction: column;
+        }
+        
+        .about-image {
+            order: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .about-content {
+            order: 2;
+        }
+    }
+
+    /* Style specyficzne dla strony głównej */
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow-x: hidden;
+    }
+    
+    .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .video-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+    
+    .video-container:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .video-container iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100vw;
+        min-height: 100vh;
+        width: auto;
+        height: auto;
+    }
+    
+    .hero-content {
+        text-align: center;
+        color: #fff;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero-content h1 {
+        font-size: 4rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        opacity: 0.7;
+    }
+    
+    .hero-content p {
+        font-size: 1.5rem;
+        margin-top: 0;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        opacity: 0.7;
+        color: #bdbdbd;
+        font-style: italic;
+    }
+    
+    .about-section {
+        padding: 5rem 2rem;
+        background-color: #121212;
+        color: #f5f5f5;
+    }
+    
+    .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .about-content h2 {
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+    }
+    
+    .about-content p {
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+    }
+    
+    .contact-info {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .contact-info a {
+        color: #ff6b35;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .contact-info a:hover {
+        color: #ff8c5a;
+    }
+    
+    /* Nowe style dla sekcji z blokami */
+    .features-section {
+        background-color: #0a0a0a;
+        padding: 4rem 2rem;
+    }
+    
+    .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .features-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .features-header h2 {
+        font-size: 2.5rem;
+        color: #f5f5f5;
+        margin-bottom: 1rem;
+    }
+    
+    .features-header p {
+        font-size: 1.2rem;
+        color: #bdbdbd;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .feature-blocks {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .feature-block {
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        background-color: #161616;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-block:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(179, 0, 0, 0.3);
+    }
+    
+    .feature-image {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .feature-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .feature-block:hover .feature-image img {
+        transform: scale(1.1);
+    }
+    
+    .feature-image::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+    }
+    
+    .feature-content {
+        padding: 1.5rem;
+    }
+    
+    .feature-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #f5f5f5;
+    }
+    
+    .feature-content p {
+        font-size: 1rem;
+        color: #bdbdbd;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+    }
+    
+    .feature-link {
+        display: inline-block;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: #ff6b35;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        padding-bottom: 3px;
+    }
+    
+    .feature-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #ff6b35;
+        transition: width 0.3s ease;
+    }
+    
+    .feature-link:hover::after {
+        width: 100%;
+    }
+    
+    @media (max-width: 768px) {
+        .feature-blocks {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .feature-block {
+            max-width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="video-container">
+        <!-- WAŻNA ZMIANA: dodane style="pointer-events: none;" oraz dodane id="hero-video" -->
+        <iframe src="https://player.vimeo.com/video/862856278?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                frameborder="0" allow="autoplay; fullscreen" allowfullscreen
+                style="width: 100vw; height: 100vh; object-fit: cover; pointer-events: none;"
+                id="hero-video">
+        </iframe>
+    </div>
+    <div class="hero-content">
+        <h1>Ashes Fireshow</h1>
+        <p>"Light is the prettiest in the dark"</p>
+    </div>
+</section>
+
+<!-- Sekcja z trzema blokami na dole, przed stopką -->
+<section class="features-section">
+    <div class="features-container">
+        <div class="features-header">
+            <h2>Nasza pasja</h2>
+            <p>Odkryj magię ognia w trzech odsłonach naszego show</p>
+        </div>
+        
+        <div class="feature-blocks">
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="{% static 'ashes/img/firecrew.jpg' %}" alt="Występy sceniczne">
+                </div>
+                <div class="feature-content">
+                    <h3>Występy sceniczne</h3>
+                    <p>Nasze choreografie ogniowe to połączenie kunsztu, precyzji i artyzmu. Tworzymy hipnotyzujące widowiska, które zapadają w pamięć na długo.</p>
+                    <a href="{% url 'ashes:gallery' %}" class="feature-link">Zobacz więcej</a>
+                </div>
+            </div>
+            
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="{% static 'ashes/img/warsztaty_3.jpg' %}" alt="Warsztaty">
+                </div>
+                <div class="feature-content">
+                    <h3>Warsztaty ogniowe</h3>
+                    <p>Dzielimy się naszą pasją i umiejętnościami prowadząc profesjonalne warsztaty. Nauczymy Cię bezpiecznego obcowania z ogniem i podstawowych technik.</p>
+                    <a href="{% url 'ashes:workshops' %}" class="feature-link">Dowiedz się więcej</a>
+                </div>
+            </div>
+            
+            <div class="feature-block">
+                <div class="feature-image">
+                    <img src="{% static 'ashes/img/coal.jpg' %}" alt="Eventy">
+                </div>
+                <div class="feature-content">
+                    <h3>Eventy i uroczystości</h3>
+                    <p>Tworzymy spektakularne pokazy na miarę Twoich oczekiwań. Współpracujemy przy eventach korporacyjnych, weselach i innych uroczystościach.</p>
+                    <a href="{% url 'ashes:contact' %}" class="feature-link">Zamów pokaz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<section class="about-section">
+    <div class="about-container">
+        <div class="about-image">
+            <img src="{% static 'ashes/img/crew.jpg' %}" alt="Ekipa Ashes Fireshow">
+            <div class="about-image-border"></div>
+        </div>
+        <div class="about-content">
+            <h2>O nas</h2>
+            <p>
+                Jesteśmy grupą artystów ogniowych z pasją do tworzenia niesamowitych show, które zachwycają i hipnotyzują.
+                Naszym żywiołem jest ogień, którym władamy z precyzją i artyzmem, tworząc niezapomniane spektakle.
+                Ashes Fireshow to więcej niż pokaz - to opowieść, to emocje, to światło pośród ciemności.
+            </p>
+            <p>
+                Grupa Ashes powstała we współpracy ze "Stowarzyszeniem na całe życie", aby nieść światło tam, gdzie panuje mrok.
+                Nasza misja to nie tylko tworzenie widowisk, ale też dzielenie się pasją z dziećmi z domów dziecka i młodzieżą w trudnej sytuacji.
+                Nazwa "Ashes" (Popioły) symbolizuje naszą wiarę w odrodzenie - jak feniks powstający z popiołów, 
+                tak i my wierzymy, że każdy młody człowiek ma w sobie siłę, by wznieść się ponad trudności.
+            </p>
+            <p>
+                Poprzez warsztaty i pokazy wyrywamy dzieci z szarej codzienności, pokazując im, że ogień to nie tylko żywioł,
+                ale metafora wewnętrznej siły, która drzemie w każdym z nas. Uczymy, że kontrolując płomień,
+                uczymy się także panować nad własnym życiem i kształtować swoją przyszłość.
+            </p>
+            
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PerformingGroup",
+  "name": "Ashes Fireshow",
+  "description": "Profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty i pokazy na eventy.",
+  "image": "https://ashes.pl{% static 'ashes/img/crew.jpg' %}",
+  "url": "https://ashes.pl",
+  "telephone": "+48500139056",
+  "email": "smolinski.patryk@mensa.org.pl",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Warszawa",
+    "addressRegion": "Mazowieckie",
+    "addressCountry": "PL"
+  },
+  "sameAs": [
+    "https://www.facebook.com/grupaashes/",
+    "https://instagram.com/ashes_fireshow",
+    "https://www.youtube.com/@patrykleszcz"
+  ],
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://ashes.pl/contact/",
+      "inLanguage": "pl",
+      "actionPlatform": [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform"
+      ]
+    },
+    "result": {
+      "@type": "Reservation",
+      "name": "Rezerwacja pokazu"
+    }
+  }
+}
+</script>
+{% endblock %}

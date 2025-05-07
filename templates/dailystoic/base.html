@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DailyStoic{% endblock %} - Codzienna dawka stoicyzmu</title>
+    <meta name="description" content="DailyStoic - codzienna dawka stoicyzmu. Poznaj mądrość starożytnych filozofów.">
+    <link rel="stylesheet" href="{% static 'dailystoic/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="{% static 'dailystoic/img/wisdom-1.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'dailystoic/img/wisdom-1.png' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'dailystoic/img/wisdom-1.png' %}" alt="DailyStoic Logo" class="logo-icon">
+                <a href="{% url 'dailystoic:home' %}">DailyStoic</a>
+            </div>
+            <ul class="menu">
+                <li><a href="{% url 'dailystoic:home' %}">Strona główna</a></li>
+                <li class="menu-divider">|</li>
+                <li><a href="{% url 'dailystoic:newsletter' %}">Newsletter</a></li>
+                <li class="menu-divider">|</li>
+                <li><a href="{% url 'dailystoic:documentation' %}">Dokumentacja</a></li>
+                <li class="menu-divider">|</li>
+                <li><a href="https://dailystoic.com" target="_blank" rel="noopener noreferrer">DailyStoic Original - ENG <i class="fas fa-external-link-alt"></i></a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>DailyStoic - codzienna dawka stoicyzmu</p>
+            <p>Strona inspirowana angielską wersją - dailystoic.com.</p>
+            <p>Cytaty pochodzą z książki Ryana Holidaya - "Stoicyzm na każdy dzień roku"</p>
+        </div>
+        <p>&copy; {% now "Y" %} DailyStoic. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script src="{% static 'dailystoic/js/main.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

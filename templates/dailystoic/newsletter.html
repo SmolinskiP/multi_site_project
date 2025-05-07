@@ -1,0 +1,46 @@
+{% extends 'dailystoic/base.html' %}
+{% load static %}
+
+{% block title %}Newsletter{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="newsletter-page-section">
+        <div class="newsletter-card">
+            <h2>Zapisz się do Newslettera</h2>
+            <p>Otrzymuj codzienną dawkę stoickich mądrości prosto na swoją skrzynkę e-mail.</p>
+            
+            {% if messages %}
+            <div class="message-container">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <form method="post" action="{% url 'dailystoic:newsletter_subscribe' %}" class="newsletter-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="form-error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="newsletter-btn">Zapisz się</button>
+            </form>
+            
+            <div class="newsletter-info">
+                <h3>Co otrzymasz?</h3>
+                <ul>
+                    <li>Codzienną dawkę stoickiej mądrości</li>
+                    <li>Refleksje nad cytatami wielkich stoików</li>
+                    <li>Inspirację do lepszego życia</li>
+                </ul>
+                <p class="newsletter-note">* W każdej chwili możesz zrezygnować z subskrypcji.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

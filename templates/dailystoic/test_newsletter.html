@@ -1,0 +1,43 @@
+{% extends 'dailystoic/base.html' %}
+{% load static %}
+
+{% block title %}Test Newslettera{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="test-section">
+        <div class="test-card">
+            <h2>Test wysyłki newslettera</h2>
+            <p>Wypełnij formularz poniżej, aby wysłać testowy email z dzisiejszym cytatem.</p>
+            
+            {% if sent %}
+                <div class="message success">
+                    <p>Email testowy został wysłany pomyślnie!</p>
+                </div>
+            {% endif %}
+            
+            {% if error %}
+                <div class="message error">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+            
+            <form method="post" class="test-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="form-error">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="newsletter-btn">Wyślij test</button>
+            </form>
+            
+            <div class="test-note">
+                <p>Ta strona jest dostępna tylko dla administratorów.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

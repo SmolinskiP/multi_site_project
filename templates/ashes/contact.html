@@ -1,0 +1,528 @@
+{% extends 'ashes/base.html' %}
+{% block title %}Kontakt | Zamów Pokaz Ognia{% endblock %}
+{% block meta_description %}Skontaktuj się z nami, aby zamówić profesjonalny pokaz ognia na swoje wydarzenie. Fireshow na wesele, urodziny, event firmowy.{% endblock %}
+{% block meta_keywords %}zamów pokaz ognia, fireshow na wesele, kontakt ashes fireshow, wycena pokazu ognia{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+<!-- Dodajemy Font Awesome do ikon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Style dla strony kontaktowej */
+    .contact-hero {
+        height: 40vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/contact-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    
+    .contact-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(179,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    }
+    
+    .contact-hero-content {
+        text-align: center;
+        color: #fff;
+        max-width: 800px;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .contact-hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    .contact-hero-content p {
+        font-size: 1.2rem;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        opacity: 0.9;
+    }
+    
+    .contact-section {
+        background-color: #0a0a0a;
+        padding: 5rem 2rem;
+    }
+    
+    .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+    }
+    
+    .contact-info {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .contact-info h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+        color: #f5f5f5;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+    
+    .contact-info h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #b30000;
+    }
+    
+    .contact-details {
+        margin-bottom: 3rem;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-icon {
+        flex: 0 0 40px;
+        height: 40px;
+        background-color: #b30000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: #fff;
+        font-size: 1.2rem;
+    }
+    
+    .contact-text {
+        flex: 1;
+    }
+    
+    .contact-text h3 {
+        font-size: 1.2rem;
+        color: #f5f5f5;
+        margin-bottom: 0.3rem;
+    }
+    
+    .contact-text p, .contact-text a {
+        font-size: 1rem;
+        color: #bdbdbd;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .contact-text a:hover {
+        color: #ff6b35;
+    }
+    
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        background-color: #1c1c1c;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f5f5f5;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+        background-color: #b30000;
+        transform: translateY(-3px);
+    }
+    
+    .contact-form-container {
+        flex: 1;
+        min-width: 300px;
+        background-color: #151515;
+        padding: 2.5rem;
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .contact-form-container h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #f5f5f5;
+    }
+    
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        color: #bdbdbd;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+        border-radius: 4px;
+        color: #f5f5f5;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: #b30000;
+        box-shadow: 0 0 0 2px rgba(179, 0, 0, 0.2);
+    }
+    
+    .form-textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+    
+    .form-check {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-check-input {
+        margin-right: 0.5rem;
+        margin-top: 0.2rem;
+    }
+    
+    .form-check-label {
+        font-size: 0.9rem;
+        color: #bdbdbd;
+    }
+    
+    .form-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: #b30000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        align-self: flex-start;
+    }
+    
+    .form-button:hover {
+        background-color: #990000;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(179, 0, 0, 0.3);
+    }
+    
+    .map-section {
+        background-color: #080808;
+        padding: 5rem 2rem;
+    }
+    
+    .map-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .map-header {
+        margin-bottom: 3rem;
+    }
+    
+    .map-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #f5f5f5;
+    }
+    
+    .map-header p {
+        font-size: 1.1rem;
+        color: #bdbdbd;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .map-wrapper {
+        position: relative;
+        height: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .map-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    .error-message {
+        color: #ff3333;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+    
+    .messages-container {
+        margin-bottom: 1.5rem;
+    }
+    
+    .message {
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+    
+    .message-success {
+        background-color: rgba(76, 175, 80, 0.1);
+        border: 1px solid #4CAF50;
+        color: #4CAF50;
+    }
+    
+    .message-error {
+        background-color: rgba(244, 67, 54, 0.1);
+        border: 1px solid #F44336;
+        color: #F44336;
+    }
+    
+    footer .social-links {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    footer .social-link {
+        margin: 0 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .contact-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        
+        .contact-hero-content p {
+            font-size: 1rem;
+        }
+        
+        .contact-container {
+            flex-direction: column;
+        }
+        
+        .contact-info h2,
+        .contact-form-container h2 {
+            font-size: 2rem;
+        }
+        
+        .map-wrapper {
+            height: 350px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <h1>Skontaktuj się z nami</h1>
+        <p>Masz pytania? Chcesz zarezerwować pokaz lub zapisać się na warsztaty? Jesteśmy tutaj, aby Ci pomóc!</p>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Informacje kontaktowe</h2>
+            
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Telefon</h3>
+                        <p><a href="tel:+48500139056">+48 500 139 056</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Email</h3>
+                        <p><a href="mailto:smolinski.patryk@mensa.org.pl">smolinski.patryk@mensa.org.pl</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h3>Godziny kontaktu</h3>
+                        <p>Poniedziałek - Piątek: 10:00 - 20:00<br>Sobota: 10:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem; color: #f5f5f5;">Śledź nas</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/grupaashes/" target="_blank" class="social-link" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/ashes_fireshow" target="_blank" class="social-link" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@patrykleszcz" target="_blank" class="social-link" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="contact-form-container">
+            <h2>Wyślij wiadomość</h2>
+            
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="message {% if message.tags %}message-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <form class="contact-form" id="contact-form" method="post" action="{% url 'ashes:contact' %}">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}" class="form-label">Imię i nazwisko *</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <div class="error-message">{{ form.name.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">Adres email *</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <div class="error-message">{{ form.email.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}" class="form-label">Numer telefonu</label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}
+                    <div class="error-message">{{ form.phone.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.subject.id_for_label }}" class="form-label">Temat *</label>
+                    {{ form.subject }}
+                    {% if form.subject.errors %}
+                    <div class="error-message">{{ form.subject.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}" class="form-label">Wiadomość *</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                    <div class="error-message">{{ form.message.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-check">
+                    {{ form.privacy }}
+                    <label for="{{ form.privacy.id_for_label }}" class="form-check-label">
+                        Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z polityką prywatności. *
+                    </label>
+                    {% if form.privacy.errors %}
+                    <div class="error-message">{{ form.privacy.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <button type="submit" class="form-button">Wyślij wiadomość</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section class="map-section">
+    <div class="map-container">
+        <div class="map-header">
+            <h2>Znajdź nas</h2>
+            <p>Zazwyczaj prowadzimy warsztaty w parku na Szaserów lub na plaży koło Stadionu Narodowego</p>
+        </div>
+        
+        <div class="map-wrapper">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1491.6976817059212!2d21.08872203912942!3d52.24892859299784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecdc1a1944d3b%3A0x9218ced504b0716f!2sSzaser%C3%B3w%20125%2C%2004-349%20Warszawa!5e1!3m2!1spl!2spl!4v1746018626075!5m2!1spl!2spl"
+                class="map-frame"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animacja pojawiania się elementów przy przewijaniu
+        const animateElements = document.querySelectorAll('.contact-info, .contact-form-container, .map-wrapper');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animateElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+    });
+</script>
+{% endblock %}

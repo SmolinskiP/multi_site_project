@@ -1,0 +1,140 @@
+{% extends 'dailystoic/base.html' %}
+{% load static %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- 1. Codzienny cytat -->
+    <section class="quote-section">
+        <div class="quote-card">
+            {% if daily_quote %}
+                <h2 class="quote-title">{{ daily_quote.title }}</h2>
+                <div class="quote-date">{{ polish_date }}</div>
+                <div class="quote-content-wrapper">
+                    <p class="quote-content">{{ daily_quote.content|linebreaksbr }}</p>
+                </div>
+                {% if daily_quote.reflection %}
+                    <div class="quote-reflection">
+                        {{ daily_quote.reflection|linebreaksbr }}
+                    </div>
+                {% endif %}
+            {% else %}
+                <h2 class="quote-title">Cytat dnia</h2>
+                <div class="quote-date">{{ polish_date }}</div>
+                <div class="quote-content-wrapper">
+                    <p class="quote-content">"Nie mów mało, ale niekoniecznie dużo. I nie mów bezużytecznych słów."<br>— Marek Aureliusz, Rozmyślania</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- 2. Sekcja Newsletter -->
+    <section class="newsletter-section">
+        <div class="newsletter-content">
+            <h2>Zapisz się do Newslettera</h2>
+            <p>Otrzymuj codzienną dawkę stoickich mądrości prosto na swoją skrzynkę e-mail.</p>
+            <a href="{% url 'dailystoic:newsletter' %}" class="newsletter-btn">Zapisz się</a>
+        </div>
+    </section>
+
+    <!-- 3. O stoicyzmie -->
+    <section class="about-section">
+        <div class="about-card">
+            <h2 class="quote-title">Czym jest stoicyzm?</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Stoicyzm to starożytna filozofia hellenistyczna, która kładzie nacisk na rozwijanie samokontroli i odporności jako środków do przezwyciężania destrukcyjnych emocji.</p>
+                    
+                    <p>Filozofia ta opiera się na przekonaniu, że cnota (uczciwość, sprawiedliwość, odwaga i umiarkowanie) jest jedynym prawdziwym dobrem, a wszystko inne jest obojętne.</p>
+                    
+                    <p>Główni myśliciele stoiccy to Marek Aureliusz, Seneka i Epiktet, których nauki pozostają aktualne do dziś.</p>
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'dailystoic/img/stoicism.jpg' %}" alt="Stoicyzm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 4. Główne koncepcje stoicyzmu -->
+<section class="concepts-section">
+    <h2 class="section-title text-center">Główne koncepcje stoicyzmu</h2>
+
+    <!-- Amor Fati - obrazek po prawej -->
+    <div class="concept-card">
+        <div class="concept-content">
+            <div class="concept-text">
+                <h3>Amor Fati</h3>
+                <p>Amor Fati, czyli "miłość do losu", to koncepcja zakładająca, że powinniśmy nie tylko akceptować wszystko, co nas spotyka, ale wręcz kochać swój los – z wszystkimi jego wzlotami i upadkami.</p>
+                <p>Zamiast walczyć z okolicznościami, na które nie mamy wpływu, powinniśmy wykorzystać je jako okazję do rozwoju osobistego i wewnętrznej siły.</p>
+                <blockquote>"Nie pragnij, aby wszystko działo się tak, jak chcesz, ale pragnij, aby wszystko działo się tak, jak się dzieje, a będziesz żył spokojnie." — Epiktet</blockquote>
+            </div>
+            <div class="concept-image">
+                <img src="{% static 'dailystoic/img/amor-fati.png' %}" alt="Amor Fati">
+            </div>
+        </div>
+    </div>
+
+    <!-- Memento Mori - obrazek po lewej -->
+    <div class="concept-card">
+        <div class="concept-content">
+            <div class="concept-image">
+                <img src="{% static 'dailystoic/img/memento-mori.png' %}" alt="Memento Mori">
+            </div>
+            <div class="concept-text">
+                <h3>Memento Mori</h3>
+                <p>Memento Mori, czyli "pamiętaj o śmierci", przypomina nam o nieuchronności śmierci i zachęca do refleksji nad tym, jak żyć w obliczu naszej skończoności.</p>
+                <p>To nie ponura obsesja, lecz motywacja do życia świadomego, celowego i pełnego wdzięczności za każdy dzień. Świadomość śmiertelności pomaga odróżnić to, co istotne, od tego, co błahe.</p>
+                <blockquote>"Żyj tak, jakbyś miał umrzeć jutro. Ucz się tak, jakbyś miał żyć wiecznie." — Mahatma Gandhi</blockquote>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dichotomia Kontroli - obrazek po prawej -->
+    <div class="concept-card">
+        <div class="concept-content">
+            <div class="concept-text">
+                <h3>Dychotomia Kontroli</h3>
+                <p>Kluczowa zasada stoicyzmu opiera się na rozróżnieniu między rzeczami, które są w naszej mocy (nasze osądy, pragnienia, wartości), a tymi, które od nas nie zależą (opinie innych, bogactwo, zdrowie).</p>
+                <p>Mądrość polega na skupieniu energii wyłącznie na tym, co możemy kontrolować, jednocześnie akceptując z pogodą ducha to, co jest poza naszym wpływem.</p>
+                <blockquote>"Spraw zależnych od nas to opinie, popędy, pragnienia, niechęci i jednym słowem to wszystko, co jest naszym działaniem. Sprawy niezależne od nas to ciało, mienie, sława, godności, jednym słowem to wszystko, co nie jest naszym działaniem." — Epiktet</blockquote>
+            </div>
+            <div class="concept-image">
+                <img src="{% static 'dailystoic/img/dichotomy-of-control.png' %}" alt="Dichotomia Kontroli">
+            </div>
+        </div>
+    </div>
+
+    <!-- Apatheia - obrazek po lewej -->
+    <div class="concept-card">
+        <div class="concept-content">
+            <div class="concept-image">
+                <img src="{% static 'dailystoic/img/apatheia.png' %}" alt="Apatheia">
+            </div>
+            <div class="concept-text">
+                <h3>Apatheia</h3>
+                <p>Apatheia to stoicki stan spokoju emocjonalnego – nie jest to brak emocji, ale wolność od niszczących, destrukcyjnych emocji takich jak gniew, zazdrość czy lęk.</p>
+                <p>Stoik nie dąży do stłumienia wszystkich uczuć, lecz do zachowania równowagi i jasności myślenia nawet w trudnych sytuacjach. Ta wolność od niepokoju umożliwia racjonalne działanie i spokojną kontemplację.</p>
+                <blockquote>"Najlepszą zemstą jest niepodobieństwo do tego, kto wyrządził ci krzywdę." — Marek Aureliusz</blockquote>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premeditatio Malorum - obrazek po prawej -->
+    <div class="concept-card">
+        <div class="concept-content">
+            <div class="concept-text">
+                <h3>Premeditatio Malorum</h3>
+                <p>Premeditatio Malorum, czyli "rozmyślanie nad złem", to praktyka polegająca na przewidywaniu potencjalnych trudności i nieszczęść, które mogą nas spotkać.</p>
+                <p>Zamiast martwić się, stoicy wykorzystują to ćwiczenie do psychicznego przygotowania się na wyzwania, zmniejszenia lęku przed niepewnością i docenienia tego, co już posiadają.</p>
+                <blockquote>„Każdego dnia rozważaj śmierć, wygnanie, chorobę, wszystkie rzeczy, które wydają się być nieszczęściami — zanim się wydarzą. Wszystko można znieść, jeśli się to uprzednio przemyślało.” — Seneka</blockquote>
+            </div>
+            <div class="concept-image">
+                <img src="{% static 'dailystoic/img/premeditatio-malorum.png' %}" alt="Premeditatio Malorum">
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+{% endblock %}

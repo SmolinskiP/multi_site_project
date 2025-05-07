@@ -1,0 +1,10 @@
+asgiref==3.8.1
+Django==5.2
+django-appconf==1.1.0
+django-imagekit==5.0.0
+django-ipware==7.0.1
+mysqlclient==2.2.7
+pilkit==3.0
+pillow==11.2.1
+python-ipware==3.0.0
+sqlparse==0.5.3

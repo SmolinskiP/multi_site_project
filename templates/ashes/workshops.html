@@ -1,0 +1,637 @@
+{% extends 'ashes/base.html' %}
+{% block title %}Warsztaty Fireshow | Nauka Tańca z Ogniem{% endblock %}
+{% block meta_description %}Profesjonalne warsztaty fireshow i nauka tańca z ogniem. Zdobądź nowe umiejętności pod okiem doświadczonych artystów ogniowych.{% endblock %}
+{% block meta_keywords %}warsztaty fireshow, nauka tańca z ogniem, kurs fire dance, szkolenia poi, lekcje fire show{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    /* Style dla strony warsztatów */
+    .workshops-hero {
+        height: 50vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/workshops-hero.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .workshops-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(179,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+    }
+    
+    .workshops-hero-content {
+        text-align: center;
+        color: #fff;
+        max-width: 800px;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .workshops-hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    .workshops-hero-content p {
+        font-size: 1.2rem;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        opacity: 0.9;
+    }
+    
+    .intro-section {
+        background-color: #0f0f0f;
+        padding: 5rem 2rem;
+    }
+    
+    .intro-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
+    }
+    
+    .intro-content {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .intro-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #f5f5f5;
+    }
+    
+    .intro-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #bdbdbd;
+        margin-bottom: 1.5rem;
+    }
+    
+    .intro-image {
+        flex: 1;
+        min-width: 300px;
+        position: relative;
+    }
+    
+    .intro-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .intro-image::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #b30000;
+        border-radius: 8px;
+        z-index: -1;
+    }
+    
+    .benefits-section {
+        background-color: #080808;
+        padding: 5rem 2rem;
+    }
+    
+    .benefits-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .benefits-header {
+        max-width: 700px;
+        margin: 0 auto 4rem;
+    }
+    
+    .benefits-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #f5f5f5;
+    }
+    
+    .benefits-header p {
+        font-size: 1.1rem;
+        color: #bdbdbd;
+    }
+    
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+    }
+    
+    .benefit-card {
+        background-color: #161616;
+        border-radius: 8px;
+        padding: 2.5rem 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .benefit-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: #b30000;
+        transition: width 0.3s ease;
+    }
+    
+    .benefit-card:hover::before {
+        width: 100%;
+        opacity: 0.1;
+    }
+    
+    .benefit-icon {
+        font-size: 2.5rem;
+        color: #b30000;
+        margin-bottom: 1.5rem;
+    }
+    
+    .benefit-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #f5f5f5;
+    }
+    
+    .benefit-card p {
+        font-size: 1rem;
+        color: #bdbdbd;
+        line-height: 1.5;
+    }
+    
+    .workshops-section {
+        background-color: #0f0f0f;
+        padding: 5rem 2rem;
+    }
+    
+    .workshops-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .workshops-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 4rem;
+    }
+    
+    .workshops-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #f5f5f5;
+    }
+    
+    .workshops-header p {
+        font-size: 1.1rem;
+        color: #bdbdbd;
+    }
+    
+    .workshops-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .workshop-item {
+        background-color: #161616;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+    
+    .workshop-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .workshop-header {
+        padding: 1.5rem;
+        background-color: #1c1c1c;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .workshop-title {
+        color: #f5f5f5;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .workshop-level {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        background-color: #b30000;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .workshop-level.beginner {
+        background-color: #4CAF50;
+    }
+    
+    .workshop-level.intermediate {
+        background-color: #FFC107;
+    }
+    
+    .workshop-level.advanced {
+        background-color: #b30000;
+    }
+    
+    .workshop-content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .workshop-image {
+        flex: 1;
+        min-width: 300px;
+    }
+    
+    .workshop-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    .workshop-details {
+        flex: 2;
+        min-width: 300px;
+        padding: 2rem;
+    }
+    
+    .workshop-description {
+        margin-bottom: 1.5rem;
+        color: #bdbdbd;
+        line-height: 1.6;
+    }
+    
+    .workshop-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .info-icon {
+        color: #b30000;
+        font-size: 1.2rem;
+    }
+    
+    .info-text {
+        color: #f5f5f5;
+    }
+    
+    .workshop-cta {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background-color: #b30000;
+        color: #fff;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 1rem;
+    }
+    
+    .workshop-cta:hover {
+        background-color: #990000;
+        color: #fff;
+    }
+    
+    .cta-section {
+        background-color: #080808;
+        padding: 5rem 2rem;
+        text-align: center;
+    }
+    
+    .cta-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem;
+        background-color: #161616;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .cta-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(179,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+        z-index: 1;
+    }
+    
+    .cta-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .cta-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: #f5f5f5;
+    }
+    
+    .cta-content p {
+        font-size: 1.2rem;
+        color: #bdbdbd;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .cta-btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+    
+    .cta-btn.primary {
+        background-color: #b30000;
+        color: #fff;
+    }
+    
+    .cta-btn.primary:hover {
+        background-color: #990000;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(179,0,0,0.3);
+    }
+    
+    .cta-btn.secondary {
+        background-color: transparent;
+        color: #f5f5f5;
+        border: 2px solid #f5f5f5;
+    }
+    
+    .cta-btn.secondary:hover {
+        background-color: #f5f5f5;
+        color: #161616;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+    }
+    
+    @media (max-width: 768px) {
+        .workshops-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        
+        .workshops-hero-content p {
+            font-size: 1rem;
+        }
+        
+        .intro-container {
+            flex-direction: column;
+        }
+        
+        .intro-image::before {
+            display: none;
+        }
+        
+        .workshop-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .workshop-level {
+            margin-top: 0.5rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cta-btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="workshops-hero">
+    <div class="workshops-hero-content">
+        <h1>Warsztaty ogniowe</h1>
+        <p>Odkryj swój potencjał i naucz się sztuki władania ogniem pod okiem doświadczonych instruktorów</p>
+    </div>
+</section>
+
+<section class="intro-section">
+    <div class="intro-container">
+        <div class="intro-content">
+            <h2>Rozpal w sobie pasję</h2>
+            <p>
+                Warsztaty Ashes Fireshow to unikalna okazja, by poznać sztukę manipulacji ogniem,
+                zdobyć nowe umiejętności i dołączyć do wyjątkowej społeczności artystów ogniowych.
+                Niezależnie od tego, czy jesteś kompletnym nowicjuszem, czy już masz doświadczenie z ogniem,
+                nasze warsztaty zostały zaprojektowane tak, aby rozwijać Twoje umiejętności i kreatywność.
+            </p>
+            <p>
+                Każde zajęcia prowadzone są przez doświadczonych artystów, którzy dzielą się swoją
+                wiedzą i pasją, dbając jednocześnie o najwyższe standardy bezpieczeństwa.
+                Przyłącz się do nas i pozwól, by ogień rozpalił Twoją wyobraźnię!
+            </p>
+        </div>
+        <div class="intro-image">
+            <img src="{% static 'ashes/img/workshops-intro.jpg' %}" alt="Warsztaty fire show">
+        </div>
+    </div>
+</section>
+
+<section class="workshops-section">
+    <div class="workshops-container">
+        <div class="workshops-header">
+            <h2>Nasze warsztaty</h2>
+            <p>Wybierz warsztat dopasowany do swoich umiejętności i zainteresowań</p>
+        </div>
+        
+        <div class="workshops-list">
+            
+            <div class="workshop-item">
+                <div class="workshop-header">
+                    <div class="workshop-title">Warsztaty dla dzieci i młodzieży</div>
+                    <span class="workshop-level beginner">Dostosowany poziom</span>
+                </div>
+                <div class="workshop-content">
+                    <div class="workshop-details">
+                        <div class="workshop-description">
+                            Specjalne warsztaty dla młodych adeptów sztuki ogniowej, dostosowane do wieku i umiejętności uczestników.
+                            Stawiamy na bezpieczeństwo, zabawę i rozwój, ucząc podstaw manipulacji rekwizytami (bez użycia ognia dla najmłodszych).
+                            Idealne dla grup z domów dziecka lub innych placówek opiekuńczo-wychowawczych.
+                        </div>
+                        <div class="workshop-info">
+                            <div class="info-item">
+                                <span class="info-icon">📅</span>
+                                <span class="info-text">Terminy ustalane indywidualnie</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">⏱️</span>
+                                <span class="info-text">2-5 godzin</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">💰</span>
+                                <span class="info-text">Bezpłatne</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-icon">👥</span>
+                                <span class="info-text">Grupy 5-15 osób</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'ashes:contact' %}" class="workshop-cta">Zapytaj o szczegóły</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="benefits-section">
+    <div class="benefits-container">
+        <div class="benefits-header">
+            <h2>Dlaczego warto?</h2>
+            <p>Poznaj korzyści płynące z udziału w naszych warsztatach ogniowych</p>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🔥</div>
+                <h3>Bezpieczeństwo</h3>
+                <p>Nauczymy Cię, jak bezpiecznie obcować z ogniem, stosując sprawdzone techniki i procedury, które minimalizują ryzyko.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">💪</div>
+                <h3>Rozwój fizyczny</h3>
+                <p>Manipulacja ogniem to świetne ćwiczenie, które wzmacnia mięśnie, poprawia koordynację i zwiększa gibkość.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🧠</div>
+                <h3>Koncentracja</h3>
+                <p>Praca z ogniem wymaga pełnej uwagi i skupienia, co przekłada się na poprawę koncentracji w codziennym życiu.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🌟</div>
+                <h3>Kreatywność</h3>
+                <p>Odkryj nowe formy wyrazu artystycznego i rozwiń swoją kreatywność poprzez eksperymentowanie z różnymi technikami.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🤝</div>
+                <h3>Społeczność</h3>
+                <p>Dołącz do społeczności pasjonatów ognia, nawiąż nowe przyjaźnie i znajdź ludzi o podobnych zainteresowaniach.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🎭</div>
+                <h3>Nowe możliwości</h3>
+                <p>Otwórz sobie drzwi do nowych możliwości występów, pokazów i współpracy artystycznej na różnych wydarzeniach.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-container">
+        <div class="cta-content">
+            <h2>Gotowy, by rozpalić swoją pasję?</h2>
+            <p>
+                Skontaktuj się z nami, aby zarezerwować miejsce na warsztatach lub uzyskać więcej informacji.
+                Każdy ogień zaczyna się od małej iskry - pozwól nam pokazać Ci, jak ją rozniecić!
+            </p>
+            <div class="cta-buttons">
+                <a href="{% url 'ashes:contact' %}" class="cta-btn primary">Zapisz się teraz</a>
+                <a href="tel:+48500139056" class="cta-btn secondary">Zadzwoń do nas</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animacja pojawiania się elementów przy przewijaniu
+        const animateElements = document.querySelectorAll('.benefit-card, .workshop-item, .intro-content, .intro-image');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animateElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+    });
+</script>
+{% endblock %}

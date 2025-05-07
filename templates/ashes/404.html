@@ -1,0 +1,211 @@
+{% extends 'ashes/base.html' %}
+{% load static %}
+
+{% block title %}404 - Strona nie znaleziona{% endblock %}
+
+{% block meta_description %}404 - Strona, której szukasz nie została znaleziona. Wróć na stronę główną i odkryj magię ognia z Ashes Fireshow.{% endblock %}
+
+{% block og_title %}404 - Strona nie znaleziona | Ashes Fireshow{% endblock %}
+{% block og_description %}Strona, której szukasz nie została znaleziona. Wróć na stronę główną i odkryj magię ognia z Ashes Fireshow.{% endblock %}
+
+{% block extra_head %}
+<style>
+    .error-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #0a0a0a;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .error-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('{% static "ashes/img/poi.png" %}') no-repeat center center;
+        background-size: cover;
+        opacity: 0.2;
+        z-index: 1;
+    }
+    
+    .error-content {
+        max-width: 800px;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        background-color: rgba(10, 10, 10, 0.8);
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .error-code {
+        font-size: 10rem;
+        font-weight: bold;
+        margin: 0;
+        line-height: 1;
+        color: #b30000;
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        animation: flicker 3s infinite alternate;
+    }
+    
+    .error-title {
+        font-size: 2.5rem;
+        margin: 1rem 0 2rem;
+        color: #f5f5f5;
+    }
+    
+    .error-message {
+        font-size: 1.2rem;
+        color: #bdbdbd;
+        margin-bottom: 3rem;
+        line-height: 1.6;
+    }
+    
+    .btn-home {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: #b30000;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-home:hover {
+        background-color: #990000;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(179, 0, 0, 0.3);
+    }
+    
+    .embers {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+    
+    .ember {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #ff6b35;
+        border-radius: 50%;
+        opacity: 0;
+        animation: float 5s infinite ease-in;
+        box-shadow: 0 0 10px 2px rgba(255, 107, 53, 0.8);
+    }
+    
+    @keyframes float {
+        0% {
+            bottom: -10px;
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 0;
+        }
+        100% {
+            bottom: 100%;
+            opacity: 0;
+        }
+    }
+    
+    @keyframes flicker {
+        0%, 18%, 22%, 25%, 53%, 57%, 100% {
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.5),
+                        0 0 30px rgba(255, 0, 0, 0.3);
+        }
+        20%, 24%, 55% {
+            text-shadow: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-bg"></div>
+    <div class="embers" id="embers"></div>
+    <div class="error-content">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Strona nie znaleziona</h2>
+        <p class="error-message">
+            Oops! Wygląda na to, że ta strona spłonęła lub nigdy nie istniała. 
+            Może szukasz innej strony? Nasz ogień rozświetla tylko istniejące ścieżki.
+        </p>
+        <a href="{% url 'ashes:home' %}" class="btn-home">Powrót do strony głównej</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Efekt pojawiania się zawartości
+        const errorContent = document.querySelector('.error-content');
+        errorContent.style.opacity = 0;
+        errorContent.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            errorContent.style.transition = 'opacity 1s ease, transform 1s ease';
+            errorContent.style.opacity = 1;
+            errorContent.style.transform = 'translateY(0)';
+        }, 200);
+        
+        // Tworzenie animacji iskier
+        const embersContainer = document.getElementById('embers');
+        
+        function createEmber() {
+            const ember = document.createElement('div');
+            ember.classList.add('ember');
+            
+            // Losowa pozycja X
+            const posX = Math.floor(Math.random() * 100);
+            ember.style.left = posX + '%';
+            
+            // Losowy rozmiar
+            const size = Math.floor(Math.random() * 6) + 5;
+            ember.style.width = size + 'px';
+            ember.style.height = size + 'px';
+            
+            // Losowy czas animacji
+            const duration = Math.floor(Math.random() * 3) + 3;
+            ember.style.animationDuration = duration + 's';
+            
+            // Losowe opóźnienie
+            const delay = Math.random() * 5;
+            ember.style.animationDelay = delay + 's';
+            
+            embersContainer.appendChild(ember);
+            
+            // Usuwanie iskry po zakończeniu animacji
+            setTimeout(() => {
+                ember.remove();
+            }, (duration + delay) * 1000);
+        }
+        
+        // Tworzenie iskier w losowych odstępach
+        setInterval(createEmber, 300);
+        
+        // Stworzenie początkowej partii iskier
+        for (let i = 0; i < 20; i++) {
+            createEmber();
+        }
+    });
+</script>
+{% endblock %}

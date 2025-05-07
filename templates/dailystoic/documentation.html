@@ -1,0 +1,233 @@
+{% extends 'dailystoic/base.html' %}
+{% load static %}
+
+{% block title %}Dokumentacja{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="documentation-section">
+        <div class="about-card">
+            <h2 class="quote-title">Dokumentacja zasobów DailyStoic</h2>
+            
+            <p>DailyStoic.pl udostępnia zasoby w formie plików JSON i PNG, które możesz wykorzystać do integracji codziennych cytatów stoickich ze swoją stroną internetową, aplikacją mobilną lub innym projektem.</p>
+            
+            <h3>Dostępne zasoby</h3>
+            
+            <h4>Pliki JSON z cytatami</h4>
+            
+            <div class="documentation-item">
+                <h5>Cytat dnia w języku polskim</h5>
+                <p><strong>URL:</strong> <a href="https://dailystoic.pl/quote/text_pl.json" target="_blank">https://dailystoic.pl/quote/text_pl.json</a></p>
+                
+                <p>Plik zawiera dzisiejszy cytat stoicki w języku polskim w formacie JSON.</p>
+                
+                <h6>Struktura pliku:</h6>
+                <pre class="code-block">
+{
+    "title": "Tytuł cytatu",
+    "quote": "Treść cytatu wraz z autorem",
+    "description": "Refleksja na temat cytatu"
+}
+                </pre>
+                
+                <h6>Przykład:</h6>
+                <pre class="code-block">
+{
+    "title": "Spokój w każdej sytuacji",
+    "quote": "„Nie daj się wciągnąć w wir spraw zewnętrznych. Znajdź czas na uczenie się czegoś dobrego, i zaprzestań bezcelowego krążenia." — Marek Aureliusz, Rozmyślania",
+    "description": "Stoicy rozumieli, że nasza uwaga jest jednym z najcenniejszych zasobów. Dziś, w erze ciągłych powiadomień i informacyjnego przeładowania, ta rada jest bardziej aktualna niż kiedykolwiek. Nie pozwól, by zewnętrzne sprawy i informacyjny szum kierowały Twoim życiem. Zamiast tego, znajdź czas na wartościowe działania i świadomy rozwój."
+}
+                </pre>
+            </div>
+            
+            <div class="documentation-item">
+                <h5>Cytat dnia w języku angielskim</h5>
+                <p><strong>URL:</strong> <a href="https://dailystoic.pl/quote/text_en.json" target="_blank">https://dailystoic.pl/quote/text_en.json</a></p>
+                
+                <p>Plik zawiera dzisiejszy cytat stoicki w języku angielskim w formacie JSON.</p>
+                
+                <p>Struktura pliku identyczna jak w wersji polskiej.</p>
+            </div>
+            
+            <h4>Obrazy z cytatami</h4>
+            
+            <div class="documentation-item">
+                <h5>Obraz z polskim cytatem dnia</h5>
+                <p><strong>URL:</strong> <a href="https://dailystoic.pl/daily.png" target="_blank">https://dailystoic.pl/daily.png</a></p>
+                
+                <p>Obraz PNG z dzisiejszym cytatem w języku polskim, zawierający tytuł, treść i refleksję.</p>
+                
+                <h6>Specyfikacja:</h6>
+                <ul>
+                    <li>Format: PNG z przezroczystym tłem</li>
+                    <li>Szerokość: 650 pikseli</li>
+                    <li>Wysokość: zmienna (zależna od długości cytatu)</li>
+                    <li>Kolor tekstu: jasny (RGB: 220, 220, 220)</li>
+                </ul>
+                
+                <div class="image-preview">
+                    <img src="/daily.png" alt="Przykładowy obraz z cytatem w języku polskim" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+            
+            <div class="documentation-item">
+                <h5>Obraz z angielskim cytatem dnia</h5>
+                <p><strong>URL:</strong> <a href="https://dailystoic.pl/daily_en.png" target="_blank">https://dailystoic.pl/daily_en.png</a></p>
+                
+                <p>Obraz PNG z dzisiejszym cytatem w języku angielskim.</p>
+                
+                <p>Specyfikacja identyczna jak w wersji polskiej.</p>
+                
+                <div class="image-preview">
+                    <img src="/daily_en.png" alt="Przykładowy obraz z cytatem w języku angielskim" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+            
+            <div class="documentation-item">
+                <h5>Puste szablony obrazów</h5>
+                <ul>
+                    <li>Polski szablon: <a href="https://dailystoic.pl/empty.png" target="_blank">https://dailystoic.pl/empty.png</a></li>
+                    <li>Angielski szablon: <a href="https://dailystoic.pl/empty_en.png" target="_blank">https://dailystoic.pl/empty_en.png</a></li>
+                </ul>
+                
+                <p>Puste szablony obrazów z przezroczystym tłem, które można wykorzystać jako bazę do własnych projektów.</p>
+            </div>
+            
+            <h3>Przykłady wykorzystania</h3>
+            
+            <div class="documentation-item">
+                <h5>1. Wyświetlanie cytatu na stronie internetowej</h5>
+                <pre class="code-block">
+&lt;div class="daily-stoic-quote"&gt;
+  &lt;h2 id="quote-title"&gt;&lt;/h2&gt;
+  &lt;blockquote id="quote-content"&gt;&lt;/blockquote&gt;
+  &lt;p id="quote-description"&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Pobranie i wyświetlenie polskiego cytatu
+  fetch('https://dailystoic.pl/quote/text_pl.json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('quote-title').textContent = data.title;
+      document.getElementById('quote-content').textContent = data.quote;
+      document.getElementById('quote-description').textContent = data.description;
+    })
+    .catch(error => console.error('Błąd podczas pobierania cytatu:', error));
+&lt;/script&gt;
+                </pre>
+            </div>
+            
+            <div class="documentation-item">
+                <h5>2. Wyświetlanie obrazu z cytatem</h5>
+                <pre class="code-block">
+&lt;div class="daily-stoic-image"&gt;
+  &lt;h2&gt;Cytat stoicki na dziś&lt;/h2&gt;
+  &lt;img src="https://dailystoic.pl/daily.png" alt="Cytat stoicki na dziś" 
+       style="max-width: 100%; height: auto;"&gt;
+  &lt;p&gt;&lt;a href="https://dailystoic.pl"&gt;Źródło: DailyStoic.pl&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+                </pre>
+            </div>
+            
+            <h3>Zastosowania</h3>
+            
+            <p>Nasze zasoby można wykorzystać w wielu różnych projektach:</p><br>
+            
+            <ol>
+                <li>Widget na stronie internetowej lub blogu</li>
+                <li>Moduł w aplikacji mobilnej</li>
+                <li>Powiadomienia w mediach społecznościowych</li>
+                <li>Wygaszacz ekranu lub tapeta komputerowa</li>
+                <li>Widżet na pulpicie urządzenia</li>
+                <li>Cytat dnia w newsletterze</li>
+                <li>Materiały edukacyjne o filozofii stoickiej</li>
+            </ol>
+            
+            <h3>Warunki użytkowania</h3>
+            
+            <ol>
+                <li>Zasoby są dostępne do użytku niekomercyjnego i komercyjnego</li>
+                <li>Prosimy o umieszczenie linku do DailyStoic.pl jako źródła cytatów</li>
+                <li>Nie modyfikuj treści cytatów ani autorstwa</li>
+                <li>Zasoby są aktualizowane codziennie o północy (CET/CEST)</li>
+            </ol>
+            
+            <h3>Kontakt</h3>
+            
+            <p>Jeśli masz pytania dotyczące wykorzystania naszych zasobów lub propozycje ulepszeń, skontaktuj się z nami pod adresem:<br> <a href="mailto:smolinski.patryk@mensa.org.pl">smolinski.patryk@mensa.org.pl</a></p>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    .documentation-section {
+        margin-bottom: 3rem;
+    }
+    
+    .documentation-section h3 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #fff;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.5rem;
+    }
+    
+    .documentation-section h4 {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+    }
+    
+    .documentation-item {
+        margin-bottom: 2rem;
+        padding-left: 1rem;
+        border-left: 3px solid var(--accent-color);
+    }
+    
+    .documentation-item h5 {
+        color: #fff;
+        margin-bottom: 0.75rem;
+    }
+    
+    .documentation-item h6 {
+        color: #ddd;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .code-block {
+        background-color: var(--dark-bg);
+        padding: 1rem;
+        border-radius: 4px;
+        overflow-x: auto;
+        font-family: monospace;
+        border: 1px solid var(--border-color);
+        margin: 1rem 0;
+        white-space: pre-wrap;
+    }
+    
+    .image-preview {
+        margin: 1.5rem 0;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        border-radius: 4px;
+    }
+    
+    ol, ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    li {
+        margin-bottom: 0.5rem;
+    }
+    
+    a {
+        word-break: break-all;
+    }
+</style>
+{% endblock %}

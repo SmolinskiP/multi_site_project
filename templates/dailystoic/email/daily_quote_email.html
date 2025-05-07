@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta http-equiv="Content-Language" content="pl">
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quote {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .reflection {
+            margin-bottom: 30px;
+        }
+        .footer {
+            font-size: 12px;
+            color: #777;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .unsubscribe {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">{{ title }}</p>
+    <p class="quote">{{ quote }}</p>
+    <div class="reflection">{{ reflection }}</div>
+    
+    <div class="image-container">
+        <img src="https://p.pdaserwis.pl/pliki/stoic/{{ img_name }}" width="900" height="500" alt="DailyStoic">
+    </div>
+    
+    <div class="footer">
+        <p>DailyStoic.pl - codzienna dawka stoicyzmu</p>
+    </div>
+    
+    <div class="unsubscribe">
+        <a href="{{ unsubscribe_url }}">Anuluj subskrypcję</a>
+    </div>
+</body>
+</html>

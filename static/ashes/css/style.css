@@ -1,0 +1,471 @@
+/* Resetowanie stylów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Zmienne globalne */
+:root {
+    --dark-bg: #0f0f0f;
+    --darker-bg: #070707;
+    --light-text: #f5f5f5;
+    --accent-color: #ff0000;
+    --accent-hover: #b30000;
+    --nav-height: 60px;
+    --nav-height-mobile: 50px;
+}
+
+/* Definicja niestandardowego fontu */
+@font-face {
+    font-family: 'Ash';
+    src: url('../fonts/ash.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../fonts/customfont.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Globalne style */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+/* Nawigacja */
+header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    background-color: rgba(7, 7, 7, 0.8) !important;
+    backdrop-filter: blur(5px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.3s ease !important;
+    height: var(--nav-height);
+}
+
+/* Klasa dla ukrytego nagłówka */
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: var(--nav-height);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Logo - bardziej kompaktowe */
+.logo a {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #b30000;
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 36px;
+    width: auto;
+    margin-right: 8px;
+}
+
+/* Menu - bardziej kompaktowe */
+.menu {
+    display: flex;
+    list-style: none;
+}
+
+.menu li {
+    margin-left: 1.5rem;
+}
+
+.menu a {
+    font-family: 'Ash', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+/* Efekty hover pozostają takie same */
+.menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #b30000;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+/* Główna sekcja - POPRAWIONA */
+main {
+    min-height: 100vh;
+    margin-top: 0; /* Usuwamy margines */
+    padding-top: var(--nav-height); /* Zastępujemy paddingiem */
+}
+
+/* Usuwamy margin-top z sekcji hero */
+.hero {
+    margin-top: 0 !important;
+}
+
+/* Usuwamy margin-top z sekcji specyficznych dla podstron */
+.gallery-hero, .workshops-hero, .contact-hero {
+    margin-top: 0 !important;
+}
+
+/* Ikona hamburgera dla mobilek */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--light-text);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Stopka */
+footer {
+    background-color: var(--darker-bg);
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+.social-links {
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    margin: 0 1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --nav-height: var(--nav-height-mobile);
+    }
+    
+    /* Kompaktowy nagłówek na mobilnych */
+    header {
+        height: var(--nav-height-mobile);
+    }
+    
+    nav {
+        height: var(--nav-height-mobile);
+        padding: 0 1rem;
+    }
+    
+    /* Mniejsze logo na mobilnych */
+    .logo a {
+        font-size: 1.7rem;
+    }
+    
+    .nav-logo {
+        height: 30px;
+    }
+    
+    /* Pokazujemy hamburger */
+    .hamburger {
+        display: block;
+        z-index: 101;
+    }
+    
+    /* Transformacje hamburgera na X przy otwarciu */
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+    
+    /* Menu mobilne jako nakładka */
+    .menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(7, 7, 7, 0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+        transition: right 0.5s ease;
+        z-index: 100;
+    }
+    
+    .menu.active {
+        right: 0;
+    }
+    
+    .menu li {
+        margin: 1.5rem 0;
+    }
+    
+    .menu a {
+        font-size: 1.5rem;
+        display: block;
+        padding: 0.5rem 1rem;
+    }
+    
+    /* Poprawka na główną sekcję dla urządzeń mobilnych */
+    main {
+        padding-top: var(--nav-height-mobile);
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ash', sans-serif;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+/* Animacje */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+/* Poprawka na stopkę */
+footer {
+    background-color: var(--darker-bg);
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+footer .social-link {
+    width: 40px;
+    height: 40px;
+    background-color: #1c1c1c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f5f5f5;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer .social-link:hover {
+    background-color: #b30000;
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 0.5rem;
+}
+
+/* Style specyficzne dla strony głównej */
+.hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-container:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100vw;
+    min-height: 100vh;
+    width: auto;
+    height: auto;
+}
+
+.hero-content {
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    opacity: 0.7;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-top: 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    opacity: 0.7;
+    color: #bdbdbd;
+    font-style: italic;
+}
+
+/* Style specyficzne dla różnych podstron */
+.about-section {
+    padding: 5rem 2rem;
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3rem;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.about-image-border {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: 15px;
+    bottom: 15px;
+    border: 2px solid #b30000;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.about-content {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.about-content h2 {
+    font-family: 'AshFont', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.about-content p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+@media (max-width: 992px) {
+    .about-container {
+        flex-direction: column;
+    }
+    
+    .about-image {
+        order: 1;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .about-content {
+        order: 2;
+    }
+}

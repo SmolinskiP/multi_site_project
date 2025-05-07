@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ashes Fireshow{% endblock %} - Pokazy Ognia, Fireshow</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}Ashes Fireshow - profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty, eventy i pokazy ognia na każdą okazję.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}fireshow, pokaz ognia, taniec z ogniem, ogień, warsztaty ogniowe, pokazy fireshow, fire performance, fire dance{% endblock %}">
+    <meta name="author" content="Ashes Fireshow">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}https://ashes.pl/{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Ashes Fireshow - Profesjonalne Pokazy Ognia{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Ashes Fireshow - profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty, eventy i pokazy ognia na każdą okazję.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'ashes/img/og-image.jpg' %}{% endblock %}">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{% block twitter_url %}https://ashes.pl/{% endblock %}">
+    <meta property="twitter:title" content="{% block twitter_title %}Ashes Fireshow - Profesjonalne Pokazy Ognia{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Ashes Fireshow - profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty, eventy i pokazy ognia na każdą okazję.{% endblock %}">
+    <meta property="twitter:image" content="{% block twitter_image %}{% static 'ashes/img/og-image.jpg' %}{% endblock %}">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical_url %}https://ashes.pl/{% endblock %}">
+
+    <link rel="stylesheet" href="{% static 'ashes/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" type="image/png" href="{% static 'ashes/img/logo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'ashes/img/logo.png' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{% url 'ashes:home' %}"><img src="{% static 'ashes/img/logo.png' %}" alt="Ashes Logo" class="nav-logo">Grupa Ashes</a>
+            </div>
+            <ul class="menu">
+                <li><a href="{% url 'ashes:home' %}">Strona startowa</a></li>
+                <li><a href="{% url 'ashes:gallery' %}">Galeria</a></li>
+                <li><a href="{% url 'ashes:workshops' %}">Warsztaty</a></li>
+                <li><a href="{% url 'ashes:contact' %}">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com/grupaashes/" target="_blank" rel="noopener noreferrer" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/ashes_fireshow" target="_blank" rel="noopener noreferrer" class="social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@patrykleszcz" target="_blank" rel="noopener noreferrer" class="social-link">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+        <p>&copy; {% now "Y" %} Ashes Fireshow. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script src="{% static 'ashes/js/main.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+
+    {% block structured_data %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PerformingGroup",
+      "name": "Ashes Fireshow",
+      "description": "Profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty i pokazy na eventy.",
+      "image": "https://ashes.pl{% static 'ashes/img/crew.jpg' %}",
+      "logo": "https://ashes.pl{% static 'ashes/img/logo.png' %}",
+      "url": "https://ashes.pl",
+      "telephone": "+48500139056",
+      "email": "smolinski.patryk@mensa.org.pl",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Warszawa",
+        "addressRegion": "Mazowieckie",
+        "addressCountry": "PL"
+      },
+      "sameAs": [
+        "https://www.facebook.com/grupaashes/",
+        "https://instagram.com/ashes_fireshow",
+        "https://www.youtube.com/@patrykleszcz"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "description": "Pokazy ognia na różne okazje: eventy, wesela, imprezy firmowe",
+        "url": "https://ashes.pl/contact/",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+    {% endblock %}
+
+</body>
+</html>
