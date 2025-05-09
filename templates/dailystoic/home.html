@@ -1,7 +1,15 @@
 {% extends 'dailystoic/base.html' %}
 {% load static %}
 
-{% block title %}Strona główna{% endblock %}
+{% block title %}Codzienna dawka stoicyzmu{% endblock %}
+{% block meta_description %}DailyStoic.pl - codzienne cytaty i mądrości stoickie od Marka Aureliusza, Seneki i Epikteta. Dzisiejszy cytat: {{ daily_quote.title }}.{% endblock %}
+{% block meta_keywords %}stoicyzm, cytaty stoickie, filozofia stoicka, {{ daily_quote.title|slugify }}, Marek Aureliusz, Seneka, Epiktet, dychotomia kontroli{% endblock %}
+{% block og_title %}{{ daily_quote.title }} | DailyStoic.pl{% endblock %}
+{% block og_description %}{{ daily_quote.content|truncatewords:25 }}{% endblock %}
+{% block og_image %}https://dailystoic.pl/daily.png{% endblock %}
+{% block twitter_title %}{{ daily_quote.title }} | DailyStoic.pl{% endblock %}
+{% block twitter_description %}{{ daily_quote.content|truncatewords:25 }}{% endblock %}
+{% block twitter_image %}https://dailystoic.pl/daily.png{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -137,4 +145,47 @@
     </div>
 </section>
 </div>
+
+<!-- Schema.org - struktura danych dla wyszukiwarek -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DailyStoic.pl",
+    "url": "https://dailystoic.pl",
+    "description": "Codzienna dawka stoicyzmu. Poznaj mądrość starożytnych filozofów.",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://dailystoic.pl/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ daily_quote.title }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dailystoic.pl"
+    },
+    "datePublished": "{% now 'c' %}",
+    "dateModified": "{% now 'c' %}",
+    "author": {
+        "@type": "Organization",
+        "name": "DailyStoic.pl"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "DailyStoic.pl",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://dailystoic.pl{% static 'dailystoic/img/wisdom-1.png' %}"
+        }
+    },
+    "description": "{{ daily_quote.content|truncatewords:25 }}"
+}
+</script>
 {% endblock %}

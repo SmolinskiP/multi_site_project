@@ -1,7 +1,16 @@
 {% extends 'dailystoic/base.html' %}
 {% load static %}
 
-{% block title %}Dokumentacja{% endblock %}
+{% block title %}Dokumentacja API - Integracja z Cytatami Stoickimi{% endblock %}
+{% block meta_description %}Dokumentacja API DailyStoic.pl. Integruj codzienne cytaty stoickie ze swoją stroną internetową, aplikacją mobilną lub innym projektem.{% endblock %}
+{% block meta_keywords %}api stoicyzm, json cytaty stoickie, integracja stoicyzm, api filozofia, widget stoicki, cytaty stoickie dla deweloperów{% endblock %}
+{% block og_title %}Dokumentacja API - Integracja z Cytatami Stoickimi | DailyStoic.pl{% endblock %}
+{% block og_description %}Pełna dokumentacja API DailyStoic.pl. Integruj codzienne cytaty stoickie ze swoją stroną internetową, aplikacją mobilną lub innym projektem.{% endblock %}
+{% block og_image %}https://dailystoic.pl{% static 'dailystoic/img/empty.png' %}{% endblock %}
+{% block twitter_title %}Dokumentacja API - Integracja z Cytatami Stoickimi | DailyStoic.pl{% endblock %}
+{% block twitter_description %}Pełna dokumentacja API DailyStoic.pl. Integruj codzienne cytaty stoickie ze swoją stroną internetową, aplikacją mobilną lub innym projektem.{% endblock %}
+{% block twitter_image %}https://dailystoic.pl{% static 'dailystoic/img/empty.png' %}{% endblock %}
+
 
 {% block content %}
 <div class="container">
@@ -230,4 +239,22 @@
         word-break: break-all;
     }
 </style>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Dokumentacja zasobów DailyStoic",
+    "headline": "Dokumentacja zasobów DailyStoic",
+    "description": "Dokumentacja API i zasobów udostępnianych przez DailyStoic.pl do wykorzystania w projektach zewnętrznych.",
+    "url": "https://dailystoic.pl/documentation",
+    "datePublished": "{% now 'c' %}",
+    "dateModified": "{% now 'c' %}",
+    "author": {
+        "@type": "Organization",
+        "name": "DailyStoic.pl"
+    }
+}
+</script>
 {% endblock %}

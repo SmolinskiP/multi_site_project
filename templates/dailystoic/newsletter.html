@@ -1,7 +1,15 @@
 {% extends 'dailystoic/base.html' %}
 {% load static %}
 
-{% block title %}Newsletter{% endblock %}
+{% block title %}Newsletter Stoicki - Codzienna Dawka Mądrości{% endblock %}
+{% block meta_description %}Zapisz się do newslettera DailyStoic.pl i otrzymuj codzienną dawkę stoickich mądrości od Marka Aureliusza, Seneki i Epikteta prosto na swoją skrzynkę e-mail.{% endblock %}
+{% block meta_keywords %}newsletter stoicki, stoicyzm email, cytaty stoickie email, codzienne cytaty, mądrość stoicka, filozofia życia{% endblock %}
+{% block og_title %}Newsletter Stoicki - Codzienna Dawka Mądrości | DailyStoic.pl{% endblock %}
+{% block og_description %}Zapisz się do newslettera i otrzymuj codzienną dawkę stoickich mądrości prosto na swoją skrzynkę e-mail. Inspiracja do lepszego życia każdego dnia.{% endblock %}
+{% block og_image %}https://dailystoic.pl{% static 'dailystoic/img/wisdom-1.png' %}{% endblock %}
+{% block twitter_title %}Newsletter Stoicki - Codzienna Dawka Mądrości | DailyStoic.pl{% endblock %}
+{% block twitter_description %}Zapisz się do newslettera i otrzymuj codzienną dawkę stoickich mądrości prosto na swoją skrzynkę e-mail. Inspiracja do lepszego życia każdego dnia.{% endblock %}
+{% block twitter_image %}https://dailystoic.pl{% static 'dailystoic/img/wisdom-1.png' %}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -43,4 +51,15 @@
         </div>
     </section>
 </div>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Newsletter DailyStoic",
+    "description": "Zapisz się do newslettera DailyStoic i otrzymuj codzienną dawkę stoickich mądrości prosto na swoją skrzynkę e-mail.",
+    "url": "https://dailystoic.pl/newsletter"
+}
+</script>
 {% endblock %}

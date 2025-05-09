@@ -5,7 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}DailyStoic{% endblock %} - Codzienna dawka stoicyzmu</title>
-    <meta name="description" content="DailyStoic - codzienna dawka stoicyzmu. Poznaj mądrość starożytnych filozofów.">
+    
+    <!-- Meta tagi SEO -->
+    <meta name="description" content="{% block meta_description %}DailyStoic - codzienna dawka stoicyzmu. Poznaj mądrość starożytnych stoików: Marka Aureliusza, Seneki i Epikteta.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}stoicyzm, cytaty stoickie, filozofia stoicka, mądrość stoicka, Marek Aureliusz, Seneka, Epiktet{% endblock %}">
+    <meta name="author" content="DailyStoic.pl">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}DailyStoic - Codzienna dawka stoicyzmu{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ daily_quote.content|truncatewords:25 }}{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dailystoic.pl{{ request.path }}">
+    <meta property="og:image" content="{% block og_image %}https://dailystoic.pl/daily.png{% endblock %}">
+    <meta property="og:site_name" content="DailyStoic.pl">
+    <meta property="og:locale" content="pl_PL">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}DailyStoic - Codzienna dawka stoicyzmu{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ daily_quote.content|truncatewords:25 }}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}https://dailystoic.pl/daily.png{% endblock %}">
+    
+    <link rel="canonical" href="https://dailystoic.pl{{ request.path }}">
     <link rel="stylesheet" href="{% static 'dailystoic/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="{% static 'dailystoic/img/wisdom-1.png' %}" sizes="32x32">

@@ -13,6 +13,7 @@ import datetime
 import base64
 from .utils import send_dailystoic_email
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.http import require_GET
 
 # Słownik do tłumaczenia nazw miesięcy na język polski
 POLISH_MONTHS = {
@@ -242,3 +243,8 @@ def test_500(request):
     """
     # Celowo wywołuje wyjątek, aby wywołać błąd 500
     raise Exception("Test strony 500")
+
+@require_GET
+def robots_txt(request):
+    content = render_to_string('dailystoic/robots.txt', {'domain': request.get_host()})
+    return HttpResponse(content, content_type='text/plain')
