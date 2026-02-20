@@ -1,0 +1,152 @@
+{% extends 'dailystoic/base.html' %}
+{% load static %}
+
+{% block title %}O mnie - Patryk Smoliński | DailyStoic.pl{% endblock %}
+{% block meta_description %}Patryk Smoliński - twórca DailyStoic.pl, pasjonat filozofii stoickiej i dzielenia się codzienną mądrością starożytnych filozofów.{% endblock %}
+{% block meta_keywords %}Patryk Smoliński, DailyStoic, stoicyzm, filozofia stoicka, cytaty stoickie, Marek Aureliusz{% endblock %}
+{% block og_title %}O mnie - Patryk Smoliński | DailyStoic.pl{% endblock %}
+{% block og_description %}Patryk Smoliński - twórca DailyStoic.pl, pasjonat filozofii stoickiej i dzielenia się codzienną mądrością starożytnych filozofów.{% endblock %}
+{% block og_image %}https://dailystoic.pl{% static 'dailystoic/img/empty.png' %}{% endblock %}
+{% block twitter_title %}O mnie - Patryk Smoliński | DailyStoic.pl{% endblock %}
+{% block twitter_description %}Patryk Smoliński - twórca DailyStoic.pl, pasjonat filozofii stoickiej i dzielenia się codzienną mądrością starożytnych filozofów.{% endblock %}
+{% block twitter_image %}https://dailystoic.pl{% static 'dailystoic/img/empty.png' %}{% endblock %}
+
+{% block extra_head %}
+<style>
+    .about-section {
+        margin-bottom: 3rem;
+    }
+
+    .about-card h2 {
+        color: #fff;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        margin-top: 2rem;
+        border-bottom: 2px solid var(--accent-color);
+        padding-bottom: 0.5rem;
+    }
+
+    .about-card h2:first-of-type {
+        margin-top: 0;
+    }
+
+    .about-card p {
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-card ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-card li {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+
+    .about-card a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .about-card a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Patryk Smoliński",
+    "jobTitle": "Twórca DailyStoic.pl",
+    "description": "Pasjonat filozofii stoickiej, twórca serwisu DailyStoic.pl z codziennymi cytatami stoickimi",
+    "url": "https://dailystoic.pl/o-mnie/",
+    "sameAs": [
+        "https://ashes.pl/"
+    ],
+    "knowsAbout": ["Stoicyzm", "Filozofia stoicka", "Marek Aureliusz", "Seneka", "Epiktet"]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="about-section">
+        <div class="about-card">
+            <h2 class="quote-title">O mnie</h2>
+
+            <h2>Lekcja pokory. O naprawianiu życia i budowaniu od nowa.</h2>
+            <p>
+                Nazywam się Patryk Smoliński. Przez lata karmiłem się przekonaniem o własnej inteligencji,
+                podczas gdy moje życie było jej zaprzeczeniem. W swojej głowie byłem kimś z ogromnym potencjałem,
+                ale w codzienności – pracując na taśmie i uciekając w nałogi – stałem się źródłem chaosu dla
+                moich najbliższych. Dziś wiem, że sprawny umysł nie znaczy nic, jeśli nie idzie za nim
+                odpowiedzialność. To opowieść o tym, jak strata stała się początkiem budowania wszystkiego od nowa.
+            </p>
+            <p>
+                Alkohol i używki powoli odbierały mi kontrolę nad emocjami i trzeźwym osądem. Stałem się mistrzem
+                manipulacji, który nie zauważał potrzeb innych, a moje ego skutecznie zagłuszało sumienie. W efekcie
+                straciłem to, co było dla mnie w życiu najcenniejsze.
+            </p>
+            <p>
+                Z perspektywy czasu czuję ogromną wdzięczność wobec osób, które miały odwagę postawić mi twardą,
+                nieprzekraczalną granicę. Brak „jeszcze jednej szansy” i brak pola do negocjacji były najtrudniejszą,
+                ale i najskuteczniejszą lekcją, jaką otrzymałem. Ta bezkompromisowa postawa bliskich wymusiła na mnie
+                bolesną, ale konieczną budowę zupełnie nowego systemu wartości.
+            </p>
+
+            <h2>Trzy lata w ciszy</h2>
+            <p>
+                Po zakończeniu terapii zamkniętej w 2020 roku zniknąłem na trzy lata. Ten czas stał się moją
+                „pustelnią”, w której od podstaw budowałem codzienną dyscyplinę. Poprzez treningi i medytację
+                uczyłem się na nowo kontaktu z własnym ciałem i emocjami, które przez lata skutecznie zagłuszałem.
+            </p>
+            <p>
+                Równolegle kontynuowałem terapię indywidualną i spotkałem na swojej drodze wielu ludzi – być może
+                mniej błyskotliwych ode mnie, ale znacznie mądrzejszych życiowo. To oni pomogli mi odnaleźć
+                właściwą ścieżkę i nauczyli mnie pokory, której wcześniej mi brakowało. Doświadczenia te uzupełniłem
+                studiami psychologicznymi. Podjąłem je jednak nie po to, by doradzać innym, ale by zrozumieć
+                mechanizmy, które doprowadziły mnie do moich upadków. Chciałem zyskać wiedzę, która pozwoli mi
+                nigdy więcej nie powtórzyć tamtych błędów. W tej ciszy zrozumiałem, że prawdziwa siła nie polega
+                na posiadaniu racji, lecz na odwadze do przyznania się do błędu, zanim ten zniszczy wszystko wokół.
+            </p>
+
+            <h2>Dzisiaj: Równowaga i obowiązek</h2>
+            <p>
+                Moje życie dzisiaj opiera się na prostych fundamentach. Praca w IT to dla mnie świat logiki i
+                konkretów, który daje mi niezbędny spokój i grunt pod nogami. Dzięki tej stabilności mogę
+                przekierować energię tam, gdzie czuję, że jest ona najbardziej potrzebna: do dzieciaków z placówek
+                opiekuńczo-wychowawczych.
+            </p>
+            <p>
+                Wsparcie dla nich to dla mnie forma „przyjemnej pokuty”. Mam w sobie ogromne pokłady empatii dla
+                tych dzieci, bo widzę w ich sytuacji bolesną prawdę: one w żaden sposób nie zasłużyły na zło,
+                które je spotkało – tak samo jak osoby w mojej przeszłości nie zasłużyły na krzywdy, które im
+                wyrządziłem. Kontakt z nimi przypomina mi o tym długu każdego dnia. Staram się dawać im konkretne
+                narzędzia do rozwoju, od instrumentów muzycznych i elektroniki, po wspólne wyjazdy i czas na
+                zwykłą, szczerą rozmowę. Projekt <a href="https://ashes.pl" target="_blank" rel="noopener">Ashes.pl</a>
+                oraz współpraca ze <a href="https://nacalezycie.org/" target="_blank" rel="noopener">Stowarzyszeniem na całe życie</a>
+                to dla mnie narzędzia, które pozwalają mi być tam, gdzie moja obecność może coś zmienić.
+            </p>
+            <p>
+                Uzupełnieniem tej drogi jest stoicyzm, którym staram się dzielić ze światem poprzez newsletter
+                <a href="{% url 'dailystoic:newsletter' %}">dailystoic.pl</a>. To dla mnie coś znacznie więcej niż
+                teoria – to codzienna instrukcja obsługi własnej głowy, która pozwala mi trzymać kurs i żyć w
+                zgodzie z własnym sumieniem.
+            </p>
+            <p>
+                Nie ukrywam przeszłości, bo to ona nauczyła mnie doceniać każdy dzień — nawet te najtrudniejsze.
+                Nie wiem, czy kiedykolwiek w pełni naprawię to, co zepsułem. Wiem tylko, że każdy dzień, w którym
+                nie zawodzę — siebie i innych — jest dniem, który ma sens.
+            </p>
+            <p>
+                Jeśli czujesz, że moje doświadczenia lub projekty, w które się angażuję, mogą przynieść komuś wartość —
+                zapraszam do <a href="mailto:smolinski.patryk@mensa.org.pl">kontaktu</a>.
+            </p>
+        </div>
+    </section>
+</div>
+{% endblock %}

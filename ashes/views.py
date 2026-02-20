@@ -104,3 +104,6 @@ def test_500(request):
     """
     # Celowo wywołuje wyjątek, aby wywołać błąd 500
     raise Exception("Test strony 500")
+
+def about_me(request):
+    return render(request, 'ashes/about_me.html')

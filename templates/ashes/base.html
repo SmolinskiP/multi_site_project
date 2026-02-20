@@ -9,7 +9,9 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="{% block meta_description %}Ashes Fireshow - profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty, eventy i pokazy ognia na każdą okazję.{% endblock %}">
     <meta name="keywords" content="{% block meta_keywords %}fireshow, pokaz ognia, taniec z ogniem, ogień, warsztaty ogniowe, pokazy fireshow, fire performance, fire dance{% endblock %}">
-    <meta name="author" content="Ashes Fireshow">
+    <meta name="author" content="Patryk Smoliński">
+    <meta name="creator" content="Patryk Smoliński">
+    <meta name="publisher" content="Ashes Fireshow">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{% block og_url %}https://ashes.pl/{% endblock %}">
@@ -23,7 +25,8 @@
     <meta property="twitter:description" content="{% block twitter_description %}Ashes Fireshow - profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty, eventy i pokazy ognia na każdą okazję.{% endblock %}">
     <meta property="twitter:image" content="{% block twitter_image %}{% static 'ashes/img/og-image.jpg' %}{% endblock %}">
     <!-- Canonical URL -->
-    <link rel="canonical" href="{% block canonical_url %}https://ashes.pl/{% endblock %}">
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="C1LSb3kN/EmoOcKiF0JgpA" async></script>
+    <link rel="canonical" href="https://ashes.pl{{ request.path }}">
 
     <link rel="stylesheet" href="{% static 'ashes/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,9 +38,9 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="{% url 'ashes:home' %}"><img src="{% static 'ashes/img/logo.png' %}" alt="Ashes Logo" class="nav-logo">Grupa Ashes</a>
+                <a href="{% url 'ashes:home' %}"><img src="{% static 'ashes/img/logo.png' %}" alt="Ashes Logo - by Patryk Smoliński" class="nav-logo">Grupa Ashes</a>
             </div>
-            <ul class="menu">
+            <ul class="menu" id="main-menu">
                 <li><a href="{% url 'ashes:home' %}">Strona startowa</a></li>
                 <li><a href="{% url 'ashes:gallery' %}">Galeria</a></li>
                 <li><a href="{% url 'ashes:workshops' %}">Warsztaty</a></li>
@@ -52,20 +55,59 @@
 
     <footer>
         <div class="social-links">
-            <a href="https://www.facebook.com/grupaashes/" target="_blank" rel="noopener noreferrer" class="social-link">
+            <a href="https://www.facebook.com/grupaashes/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook: Grupa Ashes">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://instagram.com/ashes_fireshow" target="_blank" rel="noopener noreferrer" class="social-link">
+            <a href="https://instagram.com/ashes_fireshow" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram: Ashes Fireshow">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://www.youtube.com/@patrykleszcz" target="_blank" rel="noopener noreferrer" class="social-link">
+            <a href="https://www.youtube.com/@patryk-smolinski" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube: Patryk Smoliński">
                 <i class="fab fa-youtube"></i>
             </a>
         </div>
-        <p>&copy; {% now "Y" %} Ashes Fireshow. Wszelkie prawa zastrzeżone.</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">
+            Założyciel i twórca: <strong>Patryk Smoliński</strong> / <i class="fas fa-clover" style="color: #4CAF50;"></i> <a href="https://nacalezycie.org/" target="_blank" rel="noopener noreferrer" style="color: #ff6b35; text-decoration: none; font-weight: 500;">Stowarzyszenie na całe życie</a>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9em;">
+            <i class="fas fa-infinity" style="color: #ff6b35;"></i>
+            Moja druga pasja: <a href="https://dailystoic.pl" target="_blank" rel="noopener noreferrer" style="color: #ff6b35; text-decoration: none; font-weight: 500;">Stoicyzm</a>
+        </p>
     </footer>
 
     <script src="{% static 'ashes/js/main.js' %}"></script>
+    <script>
+        (function() {
+            function ensureHamburgerA11y(button) {
+                if (!button) {
+                    return;
+                }
+                if (!button.getAttribute('type')) {
+                    button.setAttribute('type', 'button');
+                }
+                if (!button.getAttribute('aria-label')) {
+                    button.setAttribute('aria-label', 'Otwórz menu');
+                }
+                button.setAttribute('aria-controls', 'main-menu');
+                if (!button.getAttribute('aria-expanded')) {
+                    button.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            function apply() {
+                ensureHamburgerA11y(document.querySelector('.hamburger'));
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', apply);
+            } else {
+                apply();
+            }
+
+            const observer = new MutationObserver(apply);
+            observer.observe(document.documentElement, { childList: true, subtree: true });
+            window.addEventListener('load', apply);
+        })();
+    </script>
     {% block extra_scripts %}{% endblock %}
 
     {% block structured_data %}
@@ -78,18 +120,34 @@
       "image": "https://ashes.pl{% static 'ashes/img/crew.jpg' %}",
       "logo": "https://ashes.pl{% static 'ashes/img/logo.png' %}",
       "url": "https://ashes.pl",
-      "telephone": "+48500139056",
       "email": "smolinski.patryk@mensa.org.pl",
+      "founder": {
+        "@type": "Person",
+        "name": "Patryk Smoliński",
+        "email": "smolinski.patryk@mensa.org.pl",
+        "jobTitle": "Twórca projektów edukacyjnych i artystycznych",
+        "description": "Założyciel Ashes Fireshow oraz portalu DailyStoic.pl, pasjonat filozofii stoickiej i sztuk performatywnych.",
+        "sameAs": [
+          "https://www.facebook.com/patryk.smolinski.official/",
+          "https://www.youtube.com/@patryk-smolinski",
+          "https://github.com/SmolinskiP",
+          "https://www.linkedin.com/in/patryk-smoli%C5%84ski-7212b419b/",
+          "https://ashes.pl",
+          "https://dailystoic.pl"
+        ]
+      },
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Warszawa",
+        "streetAddress": "Gwardii Ludowej 2",
+        "postalCode": "06-400",
+        "addressLocality": "Ciechanów",
         "addressRegion": "Mazowieckie",
         "addressCountry": "PL"
       },
       "sameAs": [
         "https://www.facebook.com/grupaashes/",
         "https://instagram.com/ashes_fireshow",
-        "https://www.youtube.com/@patrykleszcz"
+        "https://www.youtube.com/@patryk-smolinski"
       ],
       "offers": {
         "@type": "Offer",

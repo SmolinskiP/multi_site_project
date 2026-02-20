@@ -14,7 +14,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('visits-stats/', visits_stats, name='visits_stats'),
     path('', include('dailystoic.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': {'dailystoic': DailyStoicSitemap()}}, name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap.xml', sitemap, {'sitemaps': {'dailystoic': DailyStoicSitemap}}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', TemplateView.as_view(template_name='dailystoic/robots.txt', content_type='text/plain'), name='robots_txt'),
 ]
 

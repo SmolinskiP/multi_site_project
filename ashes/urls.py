@@ -12,6 +12,7 @@ urlpatterns = [
     path('warsztaty/', views.workshops_view, name='warsztaty'),
     path('contact/', views.contact_view, name='contact'),
     path('kontakt/', views.contact_view, name='kontakt'),
+    path('o-mnie/', views.about_me, name='about_me'),
     path('test_404/', views.test_404, name='test_404'),
     path('test_500/', views.test_500, name='test_500'),
 ]

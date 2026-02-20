@@ -1,6 +1,25 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Mobile menu script loaded");
+
+    function ensureHamburgerA11y(button) {
+        if (!button) {
+            return;
+        }
+        button.type = 'button';
+        if (!button.getAttribute('aria-label')) {
+            button.setAttribute('aria-label', 'Otwórz menu');
+        }
+        button.setAttribute('aria-controls', 'main-menu');
+        if (!button.getAttribute('aria-expanded')) {
+            button.setAttribute('aria-expanded', 'false');
+        }
+        if (!button.querySelector('.sr-only')) {
+            button.insertAdjacentHTML('afterbegin', '<span class="sr-only">Menu</span>');
+        }
+    }
+
+    ensureHamburgerA11y(document.querySelector('.hamburger'));
     
     // Sprawdź, czy jesteśmy na urządzeniu mobilnym
     const isMobile = window.innerWidth <= 768;
@@ -10,25 +29,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Znajdź elementy DOM
         const menuList = document.querySelector('.menu');
-        const hamburgerButton = document.createElement('button');
-        
-        // Dodaj klasę dla hamburger button
-        hamburgerButton.classList.add('hamburger');
-        
-        // Dodaj wewnętrzną strukturę hamburgera
-        hamburgerButton.innerHTML = `
-            <span></span>
-            <span></span>
-            <span></span>
-        `;
-        
-        // Dodaj przycisk hamburger do DOM, zaraz przed menu
-        menuList.parentNode.insertBefore(hamburgerButton, menuList);
+        let hamburgerButton = document.querySelector('.hamburger');
+
+        if (!hamburgerButton) {
+            hamburgerButton = document.createElement('button');
+            hamburgerButton.classList.add('hamburger');
+            hamburgerButton.innerHTML = `
+                <span class="sr-only">Menu</span>
+                <span></span>
+                <span></span>
+                <span></span>
+            `;
+            menuList.parentNode.insertBefore(hamburgerButton, menuList);
+        }
+        ensureHamburgerA11y(hamburgerButton);
         
         // Funkcja przełączająca menu
         function toggleMenu() {
             hamburgerButton.classList.toggle('active');
             menuList.classList.toggle('active');
+            const isExpanded = menuList.classList.contains('active');
+            hamburgerButton.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            hamburgerButton.setAttribute('aria-label', isExpanded ? 'Zamknij menu' : 'Otwórz menu');
             
             // Blokuj przewijanie strony gdy menu jest otwarte
             if (menuList.classList.contains('active')) {

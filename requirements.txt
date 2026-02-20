@@ -3,6 +3,7 @@ Django==5.2
 django-appconf==1.1.0
 django-imagekit==5.0.0
 django-ipware==7.0.1
+django-recaptcha==4.0.0
 mysqlclient==2.2.7
 pilkit==3.0
 pillow==11.2.1

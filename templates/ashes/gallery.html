@@ -9,7 +9,7 @@
     /* Style dla strony galerii */
     .gallery-hero {
         height: 40vh;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/gallery-hero.jpg" %}');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/firecrew.jpg" %}');
         background-size: cover;
         background-position: center;
         display: flex;
@@ -318,8 +318,8 @@
     <div class="gallery-grid">
         {% if images %}
             {% for image in images %}
-                <div class="gallery-item" data-category="{{ image.category.slug }}">
-                    <img src="{{ image.image.url }}" alt="{{ image.title }}" class="gallery-image" loading="lazy">
+                <div class="gallery-item" data-category="{{ image.category.slug }}" data-full-image="{{ image.image.url }}">
+                    <img src="{{ image.thumbnail.url }}" alt="{{ image.title }}" class="gallery-image" loading="lazy">
                     <div class="gallery-caption">
                         <h3>{{ image.title }}</h3>
                         {% if image.description %}
@@ -331,7 +331,7 @@
         {% else %}
             <!-- Standardowe zdjęcia jako backup, gdy baza danych jest pusta -->
             <div class="gallery-item" data-category="fireshow">
-                <img src="{% static 'ashes/img/gallery/fire1.jpg' %}" alt="Fireshow performance" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/fire1.jpg' %}" alt="Fireshow performance - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Spektakl ognia</h3>
                     <p>Widowiskowy pokaz z użyciem poi ogniowych</p>
@@ -339,7 +339,7 @@
             </div>
             
             <div class="gallery-item" data-category="fireshow">
-                <img src="{% static 'ashes/img/gallery/fire2.jpg' %}" alt="Fire breathing" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/fire2.jpg' %}" alt="Fire breathing - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Oddech smoka</h3>
                     <p>Technika oddychania ogniem podczas nocnego pokazu</p>
@@ -347,7 +347,7 @@
             </div>
             
             <div class="gallery-item" data-category="fireshow">
-                <img src="{% static 'ashes/img/gallery/fire3.jpg' %}" alt="Fire performers" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/fire3.jpg' %}" alt="Fire performers - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Ognisty krąg</h3>
                     <p>Synchronizacja artystów podczas występu grupowego</p>
@@ -355,7 +355,7 @@
             </div>
             
             <div class="gallery-item" data-category="fireshow">
-                <img src="{% static 'ashes/img/gallery/fire4.jpg' %}" alt="Fire staff" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/fire4.jpg' %}" alt="Fire staff - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Władca ognia</h3>
                     <p>Pokaz z użyciem ognistego kija</p>
@@ -364,7 +364,7 @@
             
             <!-- LED Show -->
             <div class="gallery-item" data-category="ledshow">
-                <img src="{% static 'ashes/img/gallery/led1.jpg' %}" alt="LED show" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/led1.jpg' %}" alt="LED show - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Świetlne obrazy</h3>
                     <p>Malowanie światłem w ciemności</p>
@@ -372,7 +372,7 @@
             </div>
             
             <div class="gallery-item" data-category="ledshow">
-                <img src="{% static 'ashes/img/gallery/led2.jpg' %}" alt="LED performance" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/led2.jpg' %}" alt="LED performance - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Neonowa burza</h3>
                     <p>Pokaz z wykorzystaniem zaawansowanych technik LED</p>
@@ -381,7 +381,7 @@
             
             <!-- Fire Dance -->
             <div class="gallery-item" data-category="firedance">
-                <img src="{% static 'ashes/img/gallery/dance1.jpg' %}" alt="Fire dance" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/dance1.jpg' %}" alt="Fire dance - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Taniec z żywiołem</h3>
                     <p>Fuzja tańca współczesnego z manipulacją ogniem</p>
@@ -389,7 +389,7 @@
             </div>
             
             <div class="gallery-item" data-category="firedance">
-                <img src="{% static 'ashes/img/gallery/dance2.jpg' %}" alt="Fire dancer" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/dance2.jpg' %}" alt="Fire dancer - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Flamenco ognia</h3>
                     <p>Ekspresyjny taniec inspirowany tradycją hiszpańską</p>
@@ -397,7 +397,7 @@
             </div>
             
             <div class="gallery-item" data-category="firedance">
-                <img src="{% static 'ashes/img/gallery/dance3.jpg' %}" alt="Fire dance performance" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/dance3.jpg' %}" alt="Fire dance performance - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Ognisty balet</h3>
                     <p>Precyzja i gracja w tańcu z ognistymi rekwizytami</p>
@@ -405,7 +405,7 @@
             </div>
             
             <div class="gallery-item" data-category="firedance">
-                <img src="{% static 'ashes/img/gallery/dance4.jpg' %}" alt="Fire dance duo" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/dance4.jpg' %}" alt="Fire dance duo - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Ognisty duet</h3>
                     <p>Taniec w parze z elementami akrobatyki ogniowej</p>
@@ -414,7 +414,7 @@
             
             <!-- Workshops -->
             <div class="gallery-item" data-category="workshops">
-                <img src="{% static 'ashes/img/gallery/workshop1.jpg' %}" alt="Fire workshop" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/workshop1.jpg' %}" alt="Fire workshop - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Pierwsze kroki</h3>
                     <p>Warsztaty dla początkujących adeptów sztuki ognia</p>
@@ -422,7 +422,7 @@
             </div>
             
             <div class="gallery-item" data-category="workshops">
-                <img src="{% static 'ashes/img/gallery/workshop2.jpg' %}" alt="Children workshop" class="gallery-image">
+                <img src="{% static 'ashes/img/gallery/workshop2.jpg' %}" alt="Children workshop - by Patryk Smoliński" class="gallery-image">
                 <div class="gallery-caption">
                     <h3>Młodzi ogniomistrze</h3>
                     <p>Warsztaty dla dzieci z domów dziecka</p>
@@ -435,7 +435,7 @@
 <!-- Lightbox container -->
 <div class="lightbox">
     <div class="lightbox-content">
-        <img src="" alt="" class="lightbox-image">
+        <img src="" alt="Podgląd zdjęcia - by Patryk Smoliński" class="lightbox-image">
         <div class="lightbox-caption"></div>
         <button class="lightbox-close">&times;</button>
         <div class="lightbox-nav">
@@ -491,14 +491,18 @@
             item.addEventListener('click', function() {
                 const items = visibleItems();
                 currentIndex = items.indexOf(this);
-                
-                const img = this.querySelector('img');
+
                 const caption = this.querySelector('.gallery-caption h3').textContent;
-                
-                lightboxImage.src = img.src;
+                const fullImageUrl = this.getAttribute('data-full-image');
+
+                // Wyczyść poprzednie zdjęcie
+                lightboxImage.src = '';
                 lightboxCaption.textContent = caption;
                 lightbox.classList.add('active');
-                
+
+                // Załaduj pełny obraz
+                lightboxImage.src = fullImageUrl;
+
                 // Blokuj przewijanie body
                 document.body.style.overflow = 'hidden';
             });
@@ -523,26 +527,30 @@
         lightboxPrev.addEventListener('click', () => {
             const items = visibleItems();
             currentIndex = (currentIndex - 1 + items.length) % items.length;
-            
+
             const item = items[currentIndex];
-            const img = item.querySelector('img');
             const caption = item.querySelector('.gallery-caption h3').textContent;
-            
-            lightboxImage.src = img.src;
+            const fullImageUrl = item.getAttribute('data-full-image');
+
+            // Wyczyść poprzednie zdjęcie i załaduj nowe
+            lightboxImage.src = '';
             lightboxCaption.textContent = caption;
+            lightboxImage.src = fullImageUrl;
         });
-        
+
         // Nawigacja - następne zdjęcie
         lightboxNext.addEventListener('click', () => {
             const items = visibleItems();
             currentIndex = (currentIndex + 1) % items.length;
-            
+
             const item = items[currentIndex];
-            const img = item.querySelector('img');
             const caption = item.querySelector('.gallery-caption h3').textContent;
-            
-            lightboxImage.src = img.src;
+            const fullImageUrl = item.getAttribute('data-full-image');
+
+            // Wyczyść poprzednie zdjęcie i załaduj nowe
+            lightboxImage.src = '';
             lightboxCaption.textContent = caption;
+            lightboxImage.src = fullImageUrl;
         });
         
         // Obsługa klawiszy strzałek i ESC

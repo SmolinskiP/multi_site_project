@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django_recaptcha',
     'imagekit',
     'ashes',
     'dailystoic',
@@ -190,3 +191,8 @@ DAILYSTOIC_EMAIL_USE_TLS = config('DAILYSTOIC_EMAIL_USE_TLS', cast=bool)
 DAILYSTOIC_EMAIL_HOST_USER = config('DAILYSTOIC_EMAIL_HOST_USER')
 DAILYSTOIC_EMAIL_HOST_PASSWORD = config('DAILYSTOIC_EMAIL_HOST_PASSWORD')
 DAILYSTOIC_FROM_EMAIL = config('DAILYSTOIC_FROM_EMAIL')
+
+# reCAPTCHA configuration
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']

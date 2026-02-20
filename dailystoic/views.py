@@ -248,3 +248,6 @@ def test_500(request):
 def robots_txt(request):
     content = render_to_string('dailystoic/robots.txt', {'domain': request.get_host()})
     return HttpResponse(content, content_type='text/plain')
+
+def about_me(request):
+    return render(request, 'dailystoic/about_me.html')

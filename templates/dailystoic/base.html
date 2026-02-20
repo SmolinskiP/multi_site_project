@@ -9,7 +9,9 @@
     <!-- Meta tagi SEO -->
     <meta name="description" content="{% block meta_description %}DailyStoic - codzienna dawka stoicyzmu. Poznaj mądrość starożytnych stoików: Marka Aureliusza, Seneki i Epikteta.{% endblock %}">
     <meta name="keywords" content="{% block meta_keywords %}stoicyzm, cytaty stoickie, filozofia stoicka, mądrość stoicka, Marek Aureliusz, Seneka, Epiktet{% endblock %}">
-    <meta name="author" content="DailyStoic.pl">
+    <meta name="author" content="Patryk Smoliński">
+    <meta name="creator" content="Patryk Smoliński">
+    <meta name="publisher" content="DailyStoic.pl">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph -->
@@ -32,13 +34,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="{% static 'dailystoic/img/wisdom-1.png' %}" sizes="32x32">
     <link rel="apple-touch-icon" href="{% static 'dailystoic/img/wisdom-1.png' %}">
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="ncUbkmANmxA9FnVygOlE3Q" async></script>
     {% block extra_head %}{% endblock %}
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <img src="{% static 'dailystoic/img/wisdom-1.png' %}" alt="DailyStoic Logo" class="logo-icon">
+                <img src="{% static 'dailystoic/img/wisdom-1.png' %}" alt="DailyStoic Logo - by Patryk Smoliński" class="logo-icon">
                 <a href="{% url 'dailystoic:home' %}">DailyStoic</a>
             </div>
             <ul class="menu">
@@ -63,13 +66,51 @@
     <footer>
         <div class="footer-content">
             <p>DailyStoic - codzienna dawka stoicyzmu</p>
-            <p>Strona inspirowana angielską wersją - dailystoic.com.</p>
-            <p>Cytaty pochodzą z książki Ryana Holidaya - "Stoicyzm na każdy dzień roku"</p>
+            <p>Strona inspirowana angielską wersją - <a href="https://dailystoic.com" target="_blank" rel="noopener noreferrer" style="color: #ff6b35; text-decoration: none; font-weight: 500;">dailystoic.com</a>.</p>
+            <p>Cytaty pochodzą z książki Ryana Holidaya - <a href="https://lubimyczytac.pl/ksiazka/4808154/stoicyzm-na-kazdy-dzien-roku-366-medytacji-na-temat-madrosci-wytrwalosci-i-sztuki-zycia" target="_blank" rel="noopener noreferrer" style="color: #ff6b35; text-decoration: none; font-weight: 500;">"Stoicyzm na każdy dzień roku"</a></p>
+            <p style="margin-top: 15px;">Założyciel i pomysłodawca: <strong>Patryk Smoliński</strong></p>
+            <p style="margin-top: 10px;">
+                <i class="fas fa-fire" style="color: #ff6b35;"></i>
+                Moja druga pasja: <a href="https://ashes.pl" target="_blank" rel="noopener noreferrer" style="color: #ff6b35; text-decoration: none; font-weight: 500;">Grupa Ashes</a>
+            </p>
         </div>
-        <p>&copy; {% now "Y" %} DailyStoic. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
     <script src="{% static 'dailystoic/js/main.js' %}"></script>
     {% block extra_scripts %}{% endblock %}
+
+    {% block structured_data %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "DailyStoic.pl",
+      "description": "Codzienna dawka stoicyzmu. Poznaj mądrość starożytnych stoików: Marka Aureliusza, Seneki i Epikteta.",
+      "url": "https://dailystoic.pl",
+      "inLanguage": "pl",
+      "author": {
+        "@type": "Person",
+        "name": "Patryk Smoliński",
+        "email": "smolinski.patryk@mensa.org.pl",
+        "jobTitle": "Twórca projektów edukacyjnych i artystycznych",
+        "description": "Założyciel Ashes Fireshow oraz portalu DailyStoic.pl, pasjonat filozofii stoickiej i sztuk performatywnych.",
+        "sameAs": [
+          "https://www.facebook.com/patryk.smolinski.official/",
+          "https://www.youtube.com/@patryk-smolinski",
+          "https://github.com/SmolinskiP",
+          "https://www.linkedin.com/in/patryk-smoli%C5%84ski-7212b419b/",
+          "https://ashes.pl",
+          "https://dailystoic.pl"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "DailyStoic.pl",
+        "url": "https://dailystoic.pl"
+      }
+    }
+    </script>
+    {% endblock %}
+
 </body>
 </html>

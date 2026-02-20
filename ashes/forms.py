@@ -1,13 +1,24 @@
 # forms.py
 from django import forms
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 from .models import ContactMessage
 
 class ContactForm(forms.ModelForm):
+    captcha = ReCaptchaField(
+        widget=ReCaptchaV2Checkbox(
+            attrs={
+                'data-theme': 'dark',
+            }
+        ),
+        label=''
+    )
+
     privacy = forms.BooleanField(
         required=True,
         label="Wyrażam zgodę na przetwarzanie moich danych osobowych zgodnie z polityką prywatności."
     )
-    
+
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'phone', 'subject', 'message']

@@ -11,7 +11,7 @@
     /* Style dla strony kontaktowej */
     .contact-hero {
         height: 40vh;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/contact-hero.jpg" %}');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "ashes/img/poi.png" %}');
         background-size: cover;
         background-position: center;
         display: flex;
@@ -372,7 +372,7 @@
                     </div>
                     <div class="contact-text">
                         <h3>Telefon</h3>
-                        <p><a href="tel:+48500139056">+48 500 139 056</a></p>
+                        <p><a href="#" id="phone-link" data-phone="KzQ4NTAwMTM5MDU2">Kliknij aby pokazać numer</a></p>
                     </div>
                 </div>
                 
@@ -399,13 +399,13 @@
             
             <h3 style="margin-bottom: 1rem; color: #f5f5f5;">Śledź nas</h3>
             <div class="social-links">
-                <a href="https://www.facebook.com/grupaashes/" target="_blank" class="social-link" title="Facebook">
+                <a href="https://www.facebook.com/grupaashes/" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook" aria-label="Facebook: Grupa Ashes">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://instagram.com/ashes_fireshow" target="_blank" class="social-link" title="Instagram">
+                <a href="https://instagram.com/ashes_fireshow" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram" aria-label="Instagram: Ashes Fireshow">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.youtube.com/@patrykleszcz" target="_blank" class="social-link" title="YouTube">
+                <a href="https://www.youtube.com/@patryk-smolinski" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube" aria-label="YouTube: Patryk Smoliński">
                     <i class="fab fa-youtube"></i>
                 </a>
             </div>
@@ -466,7 +466,14 @@
                     <div class="error-message">{{ form.message.errors.0 }}</div>
                     {% endif %}
                 </div>
-                
+
+                <div class="form-group">
+                    {{ form.captcha }}
+                    {% if form.captcha.errors %}
+                    <div class="error-message">{{ form.captcha.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
                 <div class="form-check">
                     {{ form.privacy }}
                     <label for="{{ form.privacy.id_for_label }}" class="form-check-label">
@@ -476,7 +483,7 @@
                     <div class="error-message">{{ form.privacy.errors.0 }}</div>
                     {% endif %}
                 </div>
-                
+
                 <button type="submit" class="form-button">Wyślij wiadomość</button>
             </form>
         </div>
@@ -494,6 +501,7 @@
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1491.6976817059212!2d21.08872203912942!3d52.24892859299784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecdc1a1944d3b%3A0x9218ced504b0716f!2sSzaser%C3%B3w%20125%2C%2004-349%20Warszawa!5e1!3m2!1spl!2spl!4v1746018626075!5m2!1spl!2spl"
                 class="map-frame"
+                title="Mapa: okolice Szaserów 125, Warszawa"
                 allowfullscreen=""
                 loading="lazy">
             </iframe>
@@ -507,7 +515,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Animacja pojawiania się elementów przy przewijaniu
         const animateElements = document.querySelectorAll('.contact-info, .contact-form-container, .map-wrapper');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -516,13 +524,29 @@
                 }
             });
         }, { threshold: 0.1 });
-        
+
         animateElements.forEach(element => {
             element.style.opacity = 0;
             element.style.transform = 'translateY(30px)';
             element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(element);
         });
+
+        // Deobfuskacja numeru telefonu
+        const phoneLink = document.getElementById('phone-link');
+        if (phoneLink) {
+            phoneLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const encodedPhone = this.getAttribute('data-phone');
+                const decodedPhone = atob(encodedPhone);
+                this.textContent = decodedPhone.replace(/(\+\d{2})(\d{3})(\d{3})(\d{3})/, '$1 $2 $3 $4');
+                this.href = 'tel:' + decodedPhone;
+                // Automatycznie otwórz link po kliknięciu
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 100);
+            });
+        }
     });
 </script>
 {% endblock %}

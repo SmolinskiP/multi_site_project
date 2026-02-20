@@ -368,7 +368,7 @@
         <iframe src="https://player.vimeo.com/video/862856278?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
                 frameborder="0" allow="autoplay; fullscreen" allowfullscreen
                 style="width: 100vw; height: 100vh; object-fit: cover; pointer-events: none;"
-                id="hero-video">
+                id="hero-video" title="Wideo w tle: Ashes Fireshow">
         </iframe>
     </div>
     <div class="hero-content">
@@ -388,7 +388,7 @@
         <div class="feature-blocks">
             <div class="feature-block">
                 <div class="feature-image">
-                    <img src="{% static 'ashes/img/firecrew.jpg' %}" alt="Występy sceniczne">
+                    <img src="{% static 'ashes/img/firecrew.jpg' %}" alt="Występy sceniczne - by Patryk Smoliński">
                 </div>
                 <div class="feature-content">
                     <h3>Występy sceniczne</h3>
@@ -399,7 +399,7 @@
             
             <div class="feature-block">
                 <div class="feature-image">
-                    <img src="{% static 'ashes/img/warsztaty_3.jpg' %}" alt="Warsztaty">
+                    <img src="{% static 'ashes/img/warsztaty_3.jpg' %}" alt="Warsztaty - by Patryk Smoliński">
                 </div>
                 <div class="feature-content">
                     <h3>Warsztaty ogniowe</h3>
@@ -410,7 +410,7 @@
             
             <div class="feature-block">
                 <div class="feature-image">
-                    <img src="{% static 'ashes/img/coal.jpg' %}" alt="Eventy">
+                    <img src="{% static 'ashes/img/coal.jpg' %}" alt="Eventy - by Patryk Smoliński">
                 </div>
                 <div class="feature-content">
                     <h3>Eventy i uroczystości</h3>
@@ -425,7 +425,7 @@
 <section class="about-section">
     <div class="about-container">
         <div class="about-image">
-            <img src="{% static 'ashes/img/crew.jpg' %}" alt="Ekipa Ashes Fireshow">
+            <img src="{% static 'ashes/img/crew.jpg' %}" alt="Ekipa Ashes Fireshow - by Patryk Smoliński">
             <div class="about-image-border"></div>
         </div>
         <div class="about-content">
@@ -436,7 +436,7 @@
                 Ashes Fireshow to więcej niż pokaz - to opowieść, to emocje, to światło pośród ciemności.
             </p>
             <p>
-                Grupa Ashes powstała we współpracy ze "Stowarzyszeniem na całe życie", aby nieść światło tam, gdzie panuje mrok.
+                Grupa Ashes powstała we współpracy ze <a href="https://nacalezycie.org/" target="_blank" rel="noopener noreferrer" style="color: #ff6b35; text-decoration: none; font-weight: 500;">"Stowarzyszeniem na całe życie"</a>, aby nieść światło tam, gdzie panuje mrok.
                 Nasza misja to nie tylko tworzenie widowisk, ale też dzielenie się pasją z dziećmi z domów dziecka i młodzieżą w trudnej sytuacji.
                 Nazwa "Ashes" (Popioły) symbolizuje naszą wiarę w odrodzenie - jak feniks powstający z popiołów, 
                 tak i my wierzymy, że każdy młody człowiek ma w sobie siłę, by wznieść się ponad trudności.
@@ -461,18 +461,32 @@
   "description": "Profesjonalna grupa fireshow tworząca hipnotyzujące pokazy ognia. Występy, warsztaty i pokazy na eventy.",
   "image": "https://ashes.pl{% static 'ashes/img/crew.jpg' %}",
   "url": "https://ashes.pl",
-  "telephone": "+48500139056",
   "email": "smolinski.patryk@mensa.org.pl",
+  "founder": {
+    "@type": "Person",
+    "name": "Patryk Smoliński",
+    "email": "smolinski.patryk@mensa.org.pl",
+    "sameAs": [
+      "https://www.facebook.com/patryk.smolinski.official/",
+          "https://www.youtube.com/@patryk-smolinski",
+      "https://github.com/SmolinskiP",
+      "https://www.linkedin.com/in/patryk-smoli%C5%84ski-7212b419b/",
+      "https://ashes.pl",
+      "https://dailystoic.pl"
+    ]
+  },
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Warszawa",
+    "streetAddress": "Gwardii Ludowej 2",
+    "postalCode": "06-400",
+    "addressLocality": "Ciechanów",
     "addressRegion": "Mazowieckie",
     "addressCountry": "PL"
   },
   "sameAs": [
     "https://www.facebook.com/grupaashes/",
     "https://instagram.com/ashes_fireshow",
-    "https://www.youtube.com/@patrykleszcz"
+    "https://www.youtube.com/@patryk-smolinski"
   ],
   "potentialAction": {
     "@type": "ReserveAction",

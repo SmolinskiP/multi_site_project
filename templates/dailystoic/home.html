@@ -59,7 +59,7 @@
                     <p>Główni myśliciele stoiccy to Marek Aureliusz, Seneka i Epiktet, których nauki pozostają aktualne do dziś.</p>
                 </div>
                 <div class="about-image">
-                    <img src="{% static 'dailystoic/img/stoicism.jpg' %}" alt="Stoicyzm">
+                    <img src="{% static 'dailystoic/img/stoicism.jpg' %}" alt="Stoicyzm - by Patryk Smoliński">
                 </div>
             </div>
         </div>
@@ -76,10 +76,11 @@
                 <h3>Amor Fati</h3>
                 <p>Amor Fati, czyli "miłość do losu", to koncepcja zakładająca, że powinniśmy nie tylko akceptować wszystko, co nas spotyka, ale wręcz kochać swój los – z wszystkimi jego wzlotami i upadkami.</p>
                 <p>Zamiast walczyć z okolicznościami, na które nie mamy wpływu, powinniśmy wykorzystać je jako okazję do rozwoju osobistego i wewnętrznej siły.</p>
+                <p>Kochać swój los to także akceptować błędy, których nie da się już cofnąć, i wyciągać z nich siłę do naprawy tego, na co mamy wpływ.</p>
                 <blockquote>"Nie pragnij, aby wszystko działo się tak, jak chcesz, ale pragnij, aby wszystko działo się tak, jak się dzieje, a będziesz żył spokojnie." — Epiktet</blockquote>
             </div>
             <div class="concept-image">
-                <img src="{% static 'dailystoic/img/amor-fati.png' %}" alt="Amor Fati">
+                <img src="{% static 'dailystoic/img/amor-fati.png' %}" alt="Amor Fati - by Patryk Smoliński">
             </div>
         </div>
     </div>
@@ -88,7 +89,7 @@
     <div class="concept-card">
         <div class="concept-content">
             <div class="concept-image">
-                <img src="{% static 'dailystoic/img/memento-mori.png' %}" alt="Memento Mori">
+                <img src="{% static 'dailystoic/img/memento-mori.png' %}" alt="Memento Mori - by Patryk Smoliński">
             </div>
             <div class="concept-text">
                 <h3>Memento Mori</h3>
@@ -109,7 +110,7 @@
                 <blockquote>"Spraw zależnych od nas to opinie, popędy, pragnienia, niechęci i jednym słowem to wszystko, co jest naszym działaniem. Sprawy niezależne od nas to ciało, mienie, sława, godności, jednym słowem to wszystko, co nie jest naszym działaniem." — Epiktet</blockquote>
             </div>
             <div class="concept-image">
-                <img src="{% static 'dailystoic/img/dichotomy-of-control.png' %}" alt="Dichotomia Kontroli">
+                <img src="{% static 'dailystoic/img/dichotomy-of-control.png' %}" alt="Dichotomia Kontroli - by Patryk Smoliński">
             </div>
         </div>
     </div>
@@ -118,7 +119,7 @@
     <div class="concept-card">
         <div class="concept-content">
             <div class="concept-image">
-                <img src="{% static 'dailystoic/img/apatheia.png' %}" alt="Apatheia">
+                <img src="{% static 'dailystoic/img/apatheia.png' %}" alt="Apatheia - by Patryk Smoliński">
             </div>
             <div class="concept-text">
                 <h3>Apatheia</h3>
@@ -139,7 +140,7 @@
                 <blockquote>„Każdego dnia rozważaj śmierć, wygnanie, chorobę, wszystkie rzeczy, które wydają się być nieszczęściami — zanim się wydarzą. Wszystko można znieść, jeśli się to uprzednio przemyślało.” — Seneka</blockquote>
             </div>
             <div class="concept-image">
-                <img src="{% static 'dailystoic/img/premeditatio-malorum.png' %}" alt="Premeditatio Malorum">
+                <img src="{% static 'dailystoic/img/premeditatio-malorum.png' %}" alt="Premeditatio Malorum - by Patryk Smoliński">
             </div>
         </div>
     </div>
@@ -167,6 +168,10 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "{{ daily_quote.title }}",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://dailystoic.pl{% static 'dailystoic/img/amor-fati.png' %}"
+    },
     "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://dailystoic.pl"
@@ -174,8 +179,17 @@
     "datePublished": "{% now 'c' %}",
     "dateModified": "{% now 'c' %}",
     "author": {
-        "@type": "Organization",
-        "name": "DailyStoic.pl"
+        "@type": "Person",
+        "name": "Patryk Smoliński",
+        "email": "smolinski.patryk@mensa.org.pl",
+        "sameAs": [
+            "https://www.facebook.com/patryk.smolinski.official/",
+            "https://www.youtube.com/@patryk-smolinski",
+            "https://github.com/SmolinskiP",
+            "https://www.linkedin.com/in/patryk-smoli%C5%84ski-7212b419b/",
+            "https://ashes.pl",
+            "https://dailystoic.pl"
+        ]
     },
     "publisher": {
         "@type": "Organization",
